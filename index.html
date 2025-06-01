@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracker_fg_V1</title>
+  <!-- 🆕 Google Font (Inter) laden -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+  <link  rel="stylesheet" href="style_tracker_fgV1.css">
+  
+</head>
+<body>
+  
+  <div class="navbar">
+    <a class="tablinks" onclick="openTab(event, 'tables')">Tracker Tables</a>
+
+<!-- Piloten Dropdown Liste --> 
+    <div class="dropdown">
+      <button class="dropbtn" onmouseenter="updatePilotDropdownFromTable()">Pilot Details<i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-content" id="pilotDropdown">
+         <!--Hier kommt JavaScript rein-->
+      </div>
+    </div>
+
+
+
+    <a class="tablinks" onclick="openTab(event, 'setup')">Setup</a>
+
+    <a id="saveButton" onclick="saveTableData('Pilot1'), saveTableData('PilotList')">Save values/tables</a>
+
+    <a id="loadButton" onclick="loadTableData('Pilot1'), loadTableData('PilotList')">Load values/tables</a>
+
+  </div>
+
+  <div class="navbar-spacer"></div>
+
+
+<!-- Tracker Tables -->  
+
+<div id="tables" class="tabcontent">
+  
+  <div id="pilotTablesContainer"></div>
+</div>
+
+
+
+<!-- Pilot Details --> 
+
+
+
+  <div id="pilot1" class="tabcontent">
+    <h2>Details for:</h2>
+    <div style="display: flex; align-items: baseline; gap: 30px;">
+      <h1 id="pilot1Name" style="color: blue;"></h1>
+      <h3>|</h3>
+      <h3 id="pilot1Rank"></h3>
+    </div> 
+    <h3>Comments:</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque distinctio veniam architecto asperiores nihil. Placeat, iusto aperiam! Dolor, repellendus laudantium aliquid consequuntur, accusantium labore error unde tempore inventore excepturi laborum!</p>
+  </div>
+
+  <div id="pilot2" class="tabcontent">
+    <h2>Details for:</h2>
+    <div style="display: flex; align-items: baseline; gap: 30px;">
+      <h1 id="pilot2Name" style="color: blue;"></h1>
+      <h3>|</h3>
+      <h3 id="pilot2Rank"></h3>
+    </div>
+  </div>
+
+  <div id="pilot3" class="tabcontent">
+    <h2>Details for:</h2>
+    <div style="display: flex; align-items: baseline; gap: 30px;">
+      <h1 id="pilot3Name" style="color: blue;"></h1>
+      <h3>|</h3>
+      <h3 id="pilot3Rank"></h3>
+    </div> 
+  </div>
+
+  <div id="pilot4" class="tabcontent">
+    <h2>Details for:</h2>
+    <div style="display: flex; align-items: baseline; gap: 30px;">
+      <h1 id="pilot4Name" style="color: blue;"></h1>
+      <h3>|</h3>
+      <h3 id="pilot4Rank"></h3>
+    </div> 
+  </div>
+
+  <div id="pilot5" class="tabcontent">
+    <h2>Details for:</h2>
+    <div style="display: flex; align-items: baseline; gap: 30px;">
+      <h1 id="pilot5Name" style="color: blue;"></h1>
+      <h3>|</h3>
+      <h3 id="pilot5Rank"></h3>
+    </div> 
+  </div>
+
+  <div id="pilot6" class="tabcontent">
+    <h2>Details for:</h2>
+    <div style="display: flex; align-items: baseline; gap: 30px;">
+      <h1 id="pilot6Name" style="color: blue;"></h1>
+      <h3>|</h3>
+      <h3 id="pilot6Rank"></h3>
+    </div> 
+  </div>
+
+  <div id="pilot7" class="tabcontent">
+    <h2>Details for:</h2>
+    <div style="display: flex; align-items: baseline; gap: 30px;">
+      <h1 id="pilot7Name" style="color: blue;"></h1>
+      <h3>|</h3>
+      <h3 id="pilot7Rank"></h3>
+    </div> 
+  </div>
+
+  <div id="pilot8" class="tabcontent">
+    <h2>Details for:</h2>
+    <div style="display: flex; align-items: baseline; gap: 30px;">
+      <h1 id="pilot8Name" style="color: blue;"></h1>
+      <h3>|</h3>
+      <h3 id="pilot8Rank"></h3>
+    </div> 
+  </div>
+
+  <div id="pilot9" class="tabcontent">
+    <h2>Details for:</h2>
+    <div style="display: flex; align-items: baseline; gap: 30px;">
+      <h1 id="pilot9Name" style="color: blue;"></h1>
+      <h3>|</h3>
+      <h3 id="pilot9Rank"></h3>
+    </div> 
+  </div>
+
+  <div id="pilot10" class="tabcontent">
+    <h2>Details for:</h2>
+    <div style="display: flex; align-items: baseline; gap: 30px;">
+      <h1 id="pilot10Name" style="color: blue;"></h1>
+      <h3>|</h3>
+      <h3 id="pilot10Rank"></h3>
+    </div> 
+  </div>
+
+  <!-------------hier liegen die Detail und Company Tabellen. Erstellt von js---------->
+<div id="pilotDetailsContainer"></div>
+<div id="pilotCompanyContainer"></div>
+
+<!-- Setup --> 
+
+<div id="setup" class="tabcontent">
+    <h1>General Setup</h1>
+
+  <div class="flexbox">   
+    <div>
+      <table id="editableTablePilotList">
+        <tr id="firstRowPilotList">
+          <th>Pilot #</th>
+          <th>Name</th>
+          <th>Rank</th>
+          <th>Company ID</th>
+        </tr>
+        <tr>
+          <td>Pilot 1</td>
+          <td contenteditable="true" class="green" id="pilotName0"></td>
+          <td contenteditable="true" class="grey" id="rankPilot0"></td>
+          <td contenteditable="true" class="grey" id="companyIDPilot0"></td>
+        </tr>
+        <tr>
+          <td>Pilot 2</td>
+          <td contenteditable="true" class="green" id="pilotName1"></td>
+          <td contenteditable="true" class="grey" id="rankPilot1"></td>
+          <td contenteditable="true" class="grey" id="companyIDPilot1"></td>
+        </tr>
+        <tr>
+          <td>Pilot 3</td>
+          <td contenteditable="true" class="green" id="pilotName2"></td>
+          <td contenteditable="true" class="grey" id="rankPilot2"></td>
+          <td contenteditable="true" class="grey" id="companyIDPilot2"></td>
+        </tr>
+        <tr>
+          <td>Pilot 4</td>
+          <td contenteditable="true" class="green" id="pilotName3"></td>
+          <td contenteditable="true" class="grey" id="rankPilot3"></td>
+          <td contenteditable="true" class="grey" id="companyIDPilot3"></td>
+        </tr>
+        <tr>
+          <td>Pilot 5</td>
+          <td contenteditable="true" class="green" id="pilotName4"></td>
+          <td contenteditable="true" class="grey" id="rankPilot4"></td>
+          <td contenteditable="true" class="grey" id="companyIDPilot4"></td>
+        </tr>
+        <tr>
+          <td>Pilot 6</td>
+          <td contenteditable="true" class="green" id="pilotName5"></td>
+          <td contenteditable="true" class="grey" id="rankPilot5"></td>
+          <td contenteditable="true" class="grey" id="companyIDPilot5"></td>
+        </tr>
+        <tr>
+          <td>Pilot 7</td>
+          <td contenteditable="true" class="green" id="pilotName6"></td>
+          <td contenteditable="true" class="grey" id="rankPilot6"></td>
+          <td contenteditable="true" class="grey" id="companyIDPilot6"></td>
+        </tr>
+        <tr>
+          <td>Pilot 8</td>
+          <td contenteditable="true" class="green" id="pilotName7"></td>
+          <td contenteditable="true" class="grey" id="rankPilot7"></td>
+          <td contenteditable="true" class="grey" id="companyIDPilot7"></td>
+        </tr>
+        <tr>
+          <td>Pilot 9</td>
+          <td contenteditable="true" class="green" id="pilotName8"></td>
+          <td contenteditable="true" class="grey" id="rankPilot8"></td>
+          <td contenteditable="true" class="grey" id="companyIDPilot8"></td>
+        </tr>
+        <tr>
+          <td>Pilot 10</td>
+          <td contenteditable="true" class="green" id="pilotName9"></td>
+          <td contenteditable="true" class="grey" id="rankPilot9"></td>
+          <td contenteditable="true" class="grey" id="companyIDPilot9"></td>
+        </tr>
+      </table>
+    </div>
+  
+
+    <div>
+      <p>Fix-Detail-Items <br>(valid for every Pilot)</p>
+      <table id="fixTablePilotDetails">
+        <tr id="firstRowPilotDetails">
+          <th class="headFixItems">Fix-Items for Pilot Details</th>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green" id="fixedDetailedItem0"></td>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green" id="fixedDetailedItem1"></td>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green" id="fixedDetailedItem2"></td>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green" id="fixedDetailedItem3"></td>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green" id="fixedDetailedItem4"></td>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green" id="fixedDetailedItem5"></td>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green" id="fixedDetailedItem6"></td>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green" id="fixedDetailedItem7"></td>
+        </tr>
+      </table>
+    </div>
+  </div> 
+</div>
+
+
+
+
+<script src="tracker_fgV1.js" defer></script>
+</body>
+</html>

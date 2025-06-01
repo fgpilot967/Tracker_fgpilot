@@ -1,0 +1,215 @@
+
+body {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  background-color: rgb(157, 152, 145);
+  padding-left: 20px;
+}
+
+:root {
+  --navbar-height: 60px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  background-color: #333;
+  padding: 5px;
+  padding-left: 20px;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.navbar-spacer {
+  height: var(--navbar-height);
+}
+
+
+.navbar a {
+  float: left;
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border-radius: 20px;
+}
+
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+  margin-right: 50px;
+}
+
+.dropdown .dropbtn {
+  font-size: 22px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  border-radius: 20px;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: rgb(168, 185, 170);
+  color: black;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1001;
+  
+}
+
+.dropdown-content a {
+  float: none;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: rgb(168, 185, 170);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.tabcontent {
+  display: none;
+  margin-top: 60px;
+  margin-left: 100px;
+}
+
+.tablinks {
+  margin-right: 50px;
+}
+
+.tablinks.active {
+  background-color: rgb(168, 185, 170);
+  color: black;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+
+#pilotTablesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+  
+}
+
+#pilotDetailsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+  
+}
+
+.flexbox {
+          display: flex;
+          justify-content: space-evenly;
+          text-align: center; 
+          flex-wrap: wrap;
+          margin-top: 100px;  
+          align-items: baseline;
+           
+    }
+
+
+table {
+  border: 3px;
+  border-style: solid;
+  border-color: #333;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  background-color: rgb(232, 208, 175);
+  
+  
+}
+
+th, tr, td {
+  border: 1px;
+  border-style: dashed;
+  border-color: #333;
+  color: black;
+  text-align: center;
+  padding: 8px;
+}
+
+.headTable {
+  background-color: #333; 
+  color: white;
+  font-size: 26px;
+}
+
+
+.green {
+  background-color: rgb(168, 185, 170);
+  cursor: pointer;
+  width: 350px;
+}
+
+.grey {
+  background-color: rgb(218, 216, 216);
+  cursor: pointer;
+  width: 180px;
+}
+
+.inputDate, .inputValidity {
+  cursor: pointer;
+}
+
+
+#editableTablePilotList {
+  margin-top: 100px;
+}
+
+.detailTable {
+  width: 300px;
+  cursor: pointer;
+}
+
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  transform: scale(1.5); /* Optional – vergrößert proportional */
+  cursor: pointer;
+}
+
+.headFixItems {
+  background-color: rgb(250, 44, 44);
+}
+
+.fixItem {
+  background-color: rgb(246, 198, 108);
+}
+
+
+#fixTablePilotDetails td {
+  background-color: rgb(246, 198, 108);
+}
+
+

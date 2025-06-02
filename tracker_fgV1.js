@@ -399,7 +399,7 @@ function createPilotDetailTable(pilotNumber) {
   // Kopfzeile
   table.innerHTML = `
     <tr>
-      <th class="headTable">Item</th>
+      <th class="headTable">Info-Item</th>
       <th class="headTable">Detail</th>
     </tr>
   `;
@@ -409,7 +409,7 @@ function createPilotDetailTable(pilotNumber) {
     const row = document.createElement('tr');
     const isFixed = i <= numberOfFixedItems;
     row.innerHTML = `
-      <td ${isFixed ? "" + 'class="fixItem"': 'contenteditable="true"'} class="detailTable" id="itemDetailLane${i}Pilot${pilotNumber}"></td>
+      <td ${isFixed ? "" + 'class="fixItem"' + 'title="Fix Item from Setup"': 'contenteditable="true"'} class="detailTable" id="itemDetailLane${i}Pilot${pilotNumber}"></td>
       <td contenteditable="true" class="detailTable" id="inputDetailLane${i}Pilot${pilotNumber}"></td>
     `;
     table.appendChild(row);
@@ -430,7 +430,7 @@ function createPilotCompanyTable(pilotNumber) {
   // Kopfzeile
   table.innerHTML = `
     <tr>
-      <th class="headTable">Item</th>
+      <th class="headTable">Task-Item</th>
       <th class="headTable">Date</th>
       <th class="headTable">Passed</th>
     </tr>

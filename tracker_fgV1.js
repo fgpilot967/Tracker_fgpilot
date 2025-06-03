@@ -481,4 +481,138 @@ for (let pilotNumber = 1; pilotNumber <= numberOfPilots; pilotNumber++) {
 
 
 
+//-------------local storage - pilotTablesContainer - für jede Tabelle - Zelle für Zelle---------------
+
+
+function saveAllPilotTables() {
+  const container = document.getElementById("pilotTablesContainer");
+  const tables = container.querySelectorAll("table");
+  const allData = {};
+
+  tables.forEach((table) => {
+    const tableId = table.id;
+    const tableData = [];
+
+    const rows = table.querySelectorAll("tr");
+    rows.forEach((row) => {
+      const rowData = [];
+      const cells = row.querySelectorAll("td, th");
+      cells.forEach((cell) => {
+        const input = cell.querySelector("input");
+        if (input) {
+          if (input.type === "checkbox") {
+            rowData.push(input.checked);
+          } else if (input.type === "date") {
+            rowData.push(input.value);
+          } else {
+            rowData.push(input.value);
+          }
+        } else {
+          rowData.push(cell.textContent.trim());
+        }
+      });
+      tableData.push(rowData);
+    });
+
+    allData[tableId] = tableData;
+  });
+
+  localStorage.setItem("pilotTablesData", JSON.stringify(allData));
+  console.log("✅ Tabellen mit Input-Feldern gespeichert.");
+}
+
+
+
+//-------- Tabellen laden - pilotTablesContainer----------
+
+function loadAllPilotTables() {
+  const savedData = localStorage.getItem("pilotTablesData");
+  if (!savedData) return;
+
+  const allData = JSON.parse(savedData);
+
+  for (const tableId in allData) {
+    const table = document.getElementById(tableId);
+    if (!table) continue;
+
+    const rows = table.querySelectorAll("tr");
+    allData[tableId].forEach((rowData, rowIndex) => {
+      const cells = rows[rowIndex]?.querySelectorAll("td, th");
+      if (!cells) return;
+
+      rowData.forEach((value, cellIndex) => {
+        const cell = cells[cellIndex];
+        const input = cell.querySelector("input");
+
+        if (input) {
+          if (input.type === "checkbox") {
+            input.checked = value === true;
+          } else {
+            input.value = value;
+          }
+        } else {
+          cell.textContent = value;
+        }
+      });
+    });
+  }
+
+  updateAllPilots(numberOfPilots, numberOfRows);
+  console.log("✅ Tabellen erfolgreich wiederhergestellt.");
+}
+
+
+
+
+
+// Funktion zum Speichern der Pilot-List-Tabelle -------------------
+function saveTablePilotList() {
+    const table = document.getElementById("editableTablePilotList");
+    const rows = table.rows;
+    const tableData = [];
+
+    for (let i = 1; i < rows.length; i++) {  // i=1 um Kopfzeile zu überspringen
+        const rowData = [];
+        for (let j = 0; j < rows[i].cells.length; j++) {
+            const cell = rows[i].cells[j];
+            rowData.push(cell.textContent.trim()); // 🔁 DAS hat gefehlt!
+        }
+        tableData.push(rowData);
+    }
+
+    localStorage.setItem("TablePilotList", JSON.stringify(tableData));
+    console.log("Pilot-List gespeichert");
+}
+
+
+// Funktion zum Laden der Pilot-List-Tabelle--------------------
+function loadTablePilotList() {
+    const table = document.getElementById("editableTablePilotList");
+    const storedData = JSON.parse(localStorage.getItem("TablePilotList"));
+
+    if (storedData) {
+        for (let i = 1; i < table.rows.length; i++) {
+            const row = table.rows[i];
+            const rowData = storedData[i - 1]; // 📌 Index aus gespeichertem Array
+
+            if (rowData) {
+                for (let j = 0; j < row.cells.length; j++) {
+                    row.cells[j].textContent = rowData[j] || "";
+                }
+            }
+        }
+        console.log("Pilot-List geladen");
+    } else {
+        console.log("Keine gespeicherten Daten für Pilot-List gefunden.");
+    }
+
+    updateRankArrayFromIds();
+    updateIDArrayFromIds();
+    //updateDetailArrayFromIds();
+    updateArrayFromIds();
+    updatePilotHeadlines();
+    updatePilotParagraph();
+    updatePilotParagraphRank();
+}
+
 

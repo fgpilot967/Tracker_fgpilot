@@ -430,7 +430,7 @@ function createPilotCompanyTable(pilotNumber) {
   // Kopfzeile
   table.innerHTML = `
     <tr>
-      <th class="headTable">Task-Item</th>
+      <th class="headTable">Initial-Task-Item</th>
       <th class="headTable">Date</th>
       <th class="headTable">Passed</th>
     </tr>

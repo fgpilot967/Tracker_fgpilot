@@ -575,9 +575,9 @@ function saveTablePilotList() {
         const rowData = [];
         for (let j = 0; j < rows[i].cells.length; j++) {
             const cell = rows[i].cells[j];
-            rowData.push(cell.textContent.trim()); // 🔁 DAS hat gefehlt!
+            rowData.push(cell.textContent.trim()); // 🔁 DAS hat gefehlt! push den cell.textcontent in das rowData
         }
-        tableData.push(rowData);
+        tableData.push(rowData); // push das rowData-Array in das tableData-Array
     }
 
     localStorage.setItem("TablePilotList", JSON.stringify(tableData));

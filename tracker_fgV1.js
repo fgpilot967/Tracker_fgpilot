@@ -558,7 +558,7 @@ function loadAllPilotTables() {
   }
 
   updateAllPilots(numberOfPilots, numberOfRows);
-  console.log("✅ Tabellen erfolgreich wiederhergestellt.");
+  console.log("✅ Piloten-Tabellen erfolgreich wiederhergestellt.");
 }
 
 
@@ -601,7 +601,7 @@ function loadTablePilotList() {
                 }
             }
         }
-        console.log("Pilot-List geladen");
+        console.log("✅ Pilot-List geladen");
     } else {
         console.log("Keine gespeicherten Daten für Pilot-List gefunden.");
     }
@@ -613,6 +613,59 @@ function loadTablePilotList() {
     updatePilotHeadlines();
     updatePilotParagraph();
     updatePilotParagraphRank();
+}
+
+
+
+
+// Funktion zum Speichern der Pilot-Fix-Item-Tabelle -------------------
+function saveTableFixItems() {
+    const table = document.getElementById("fixTablePilotDetails");
+    const rows = table.rows;
+    const tableData = [];
+
+    for (let i = 1; i < rows.length; i++) {  // i=1 um Kopfzeile zu überspringen
+        const rowData = [];
+        for (let j = 0; j < rows[i].cells.length; j++) {
+            const cell = rows[i].cells[j];
+            rowData.push(cell.textContent.trim()); // 🔁 DAS hat gefehlt! push den cell.textcontent in das rowData
+        }
+        tableData.push(rowData); // push das rowData-Array in das tableData-Array
+    }
+
+    localStorage.setItem("TableFixItems", JSON.stringify(tableData));
+    console.log("✅ Pilot-Fix-Items gespeichert");
+}
+
+
+// Funktion zum Laden der Pilot-Fix-Item-Tabelle--------------------
+function loadTableFixItems() {
+    const table = document.getElementById("fixTablePilotDetails");
+    const storedData = JSON.parse(localStorage.getItem("TableFixItems"));
+
+    if (storedData) {
+        for (let i = 1; i < table.rows.length; i++) {
+            const row = table.rows[i];
+            const rowData = storedData[i - 1]; // 📌 Index aus gespeichertem Array
+
+            if (rowData) {
+                for (let j = 0; j < row.cells.length; j++) {
+                    row.cells[j].textContent = rowData[j] || "";
+                }
+            }
+        }
+        console.log("✅ Pilot-Fix-Items geladen");
+    } else {
+        console.log("Keine gespeicherten Daten für Pilot-Fix-Items gefunden.");
+    }
+
+    
+    updateDetailArrayFromIds();
+
+    for (let pilotNumber = 1; pilotNumber <= numberOfPilots; pilotNumber++) {
+    insertFixedDetailItems(pilotNumber);
+    }
+    
 }
 
 

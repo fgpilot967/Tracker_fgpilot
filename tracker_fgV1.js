@@ -117,7 +117,7 @@ function updateIDArrayFromIds() {
   const numberOfPilots = 10; // anpassen je nach Anzahl
 
   for (let i = 0; i < numberOfPilots; i++) {
-    const cell = document.getElementById(`companyIDPilot${i}`);
+    const cell = document.getElementById(`notifyEmailPilot${i}`);
     companyID.push(cell.textContent.trim());
 
     // Event nur einmal hinzufügen

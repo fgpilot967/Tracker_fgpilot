@@ -177,6 +177,12 @@ th, tr, td {
   width: 350px;
 }
 
+.orange {
+  background-color: rgb(246, 198, 108);
+  cursor: pointer;
+  width: 300px;
+}
+
 .inputDate, .inputValidity {
   cursor: pointer;
 }
@@ -207,11 +213,11 @@ input[type="checkbox"] {
   background-color: rgb(246, 198, 108);
 }
 
-
+/*
 #fixTablePilotDetails td {
   background-color: rgb(246, 198, 108);
 }
-
+*/
 
 textarea {
   background-color: rgb(232, 208, 175);

@@ -1,4 +1,10 @@
 
+//----------------- allgemeine CONST-anten ----------------
+
+const numberOfPilots = 10; // Pilotenzahl zur Erstellung der Tabellen
+const numberOfRowsPilots = 15; // Anzahl der Reihen pro Pilotentabelle
+const numberOfRowsDetail = 15; // Anzahl der Reihen der Info-Item / Detail Tabellen
+const numberOfRowsTask = 15; // Anzahl der Reihen der Initial-Task-Item Tabellen
 
 
 function openTab(evt, tabName) {
@@ -35,15 +41,14 @@ function openTab(evt, tabName) {
 
 //-----------------Initial für die Berechnung---------------------------
 
-const numberOfPilots = 10;
-const numberOfRows = 15;
+
 
 // Initial berechnen:
-updateAllPilots(numberOfPilots, numberOfRows);
+// updateAllPilots(numberOfPilots, numberOfRowsPilots);
 
 // Optional live:
 for (let p = 1; p <= numberOfPilots; p++) {
-  setupLiveCalculation(p, numberOfRows);
+  setupLiveCalculation(p, numberOfRowsPilots);
 }
 
 //-------------------Automatisches Array Pilot Names---------------------------
@@ -168,7 +173,7 @@ function createPilotTable(pilotNumber) {
   `;
   
   // Datenzeilen
-  for (let i = 1; i <= numberOfRows; i++) {
+  for (let i = 1; i <= numberOfRowsPilots; i++) {
     const row = document.createElement('tr');
     row.innerHTML = `
       <td contenteditable="true" class="green"></td>
@@ -219,11 +224,11 @@ function updatePilotDropdownFromTable() {
 //------------------Automatische update der Tabelle------------
 
 // Initial berechnen:
-updateAllPilots(numberOfPilots, numberOfRows);
+// updateAllPilots(numberOfPilots, numberOfRowsPilots);
 
 // Optional live:
 for (let p = 1; p <= numberOfPilots; p++) {
-  setupLiveCalculation(p, numberOfRows);
+  setupLiveCalculation(p, numberOfRowsPilots);
 }
 
 
@@ -282,34 +287,40 @@ function calculateRow(pilotNumber, rowNumber) {
 
 
 
-// 📨 Automatische E-Mail bei Fälligkeit
-const licenseCell = document.querySelector(`#editableTablePilot${pilotNumber} tr:nth-child(${rowNumber + 2}) td:nth-child(1)`);
-const licenseName = licenseCell ? licenseCell.textContent.trim() : "your license";
+  // 📨 Automatische E-Mail bei Fälligkeit
+  const licenseCell = document.querySelector(`#editableTablePilot${pilotNumber} tr:nth-child(${rowNumber + 2}) td:nth-child(1)`);
+  const licenseName = licenseCell ? licenseCell.textContent.trim() : "your license";
 
-const recipient = `pilot${pilotNumber}@abc.com`; // oder aus deinem Array: pilotEmail[pilotNumber - 1]
-const ccRecipient = 'xxx@abc.com, xyz@abc.com';
+  const recipient = `pilot${pilotNumber}@abc.com`; // oder aus deinem Array: pilotEmail[pilotNumber - 1]
+  const ccRecipient = 'xxx@abc.com, xyz@abc.com';
 
-function sendEmail(remDays, checkboxId) {
-  const subject = `Automated Email - ${licenseName}`;
-  const body = `Your ${licenseName} is going to expire. ${remDays} days left. Please contact xxx.`;
-  const mailtoLink = `mailto:${recipient}?cc=${encodeURIComponent(ccRecipient)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailtoLink;
-  document.getElementById(checkboxId).checked = true;
+  function sendEmail(remDays, checkboxId) {
+    const subject = `Automated Email - ${licenseName}`;
+    const body = `Your ${licenseName} is going to expire. ${remDays} days left. Please contact xxx.`;
+    const mailtoLink = `mailto:${recipient}?cc=${encodeURIComponent(ccRecipient)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+    document.getElementById(checkboxId).checked = true;
+  }
+
+  // Prüfen & Mail starten
+  if (remDays <= 30) {
+    const cb30 = `emailSent30LiLane${rowNumber}Pilot${pilotNumber}`;
+    if (!document.getElementById(cb30).checked) sendEmail(30, cb30);
+  } else if (remDays <= 60) {
+    const cb60 = `emailSent60LiLane${rowNumber}Pilot${pilotNumber}`;
+    if (!document.getElementById(cb60).checked) sendEmail(60, cb60);
+  } else if (remDays <= 90) {
+    const cb90 = `emailSent90LiLane${rowNumber}Pilot${pilotNumber}`;
+    if (!document.getElementById(cb90).checked) sendEmail(90, cb90);
+  }
 }
 
-// Prüfen & Mail starten
-if (remDays <= 30) {
-  const cb30 = `emailSent30LiLane${rowNumber}Pilot${pilotNumber}`;
-  if (!document.getElementById(cb30).checked) sendEmail(30, cb30);
-} else if (remDays <= 60) {
-  const cb60 = `emailSent60LiLane${rowNumber}Pilot${pilotNumber}`;
-  if (!document.getElementById(cb60).checked) sendEmail(60, cb60);
-} else if (remDays <= 90) {
-  const cb90 = `emailSent90LiLane${rowNumber}Pilot${pilotNumber}`;
-  if (!document.getElementById(cb90).checked) sendEmail(90, cb90);
-}
 
-
+// 🔄 Aktualisiere ALLE Piloten
+function updateAllPilots(numberOfPilots, numberOfRows) {
+  for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
+    updatePilotTable(pilot, numberOfRows);
+  }
 }
 
 // 🔁 Aktualisiere alle Zeilen eines Piloten
@@ -319,12 +330,6 @@ function updatePilotTable(pilotNumber, numberOfRows) {
   }
 }
 
-// 🔄 Aktualisiere ALLE Piloten
-function updateAllPilots(numberOfPilots, numberOfRows) {
-  for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
-    updatePilotTable(pilot, numberOfRows);
-  }
-}
 
 // ⚡ Optional: Live-Berechnung aktivieren
 function setupLiveCalculation(pilotNumber, numberOfRows) {
@@ -413,10 +418,8 @@ function createPilotDetailTable(pilotNumber) {
     `;
     table.appendChild(row);
   }
-
   
   return table;
-
 }
 
 
@@ -556,7 +559,7 @@ function loadAllPilotTables() {
     });
   }
 
-  updateAllPilots(numberOfPilots, numberOfRows);
+  updateAllPilots(numberOfPilots, numberOfRowsPilots);
   console.log("✅ Piloten-Tabellen erfolgreich wiederhergestellt.");
 }
 

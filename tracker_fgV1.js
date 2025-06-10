@@ -5,6 +5,8 @@ const numberOfPilots = 10; // Pilotenzahl zur Erstellung der Tabellen
 const numberOfRowsPilots = 15; // Anzahl der Reihen pro Pilotentabelle
 const numberOfRowsDetail = 15; // Anzahl der Reihen der Info-Item / Detail Tabellen
 const numberOfRowsTask = 15; // Anzahl der Reihen der Initial-Task-Item Tabellen
+const numberOfFixItems = 8; // Anzahl der Fix-Items in der Fix-Detail-Item Tabelle
+const numberOfFixedInitial = 8; // Anzahl der Fix-Initial-Task-Items
 
 
 function openTab(evt, tabName) {
@@ -38,18 +40,13 @@ function openTab(evt, tabName) {
 
 
 
-
 //-----------------Initial für die Berechnung---------------------------
 
-
-
-// Initial berechnen:
-// updateAllPilots(numberOfPilots, numberOfRowsPilots);
-
-// Optional live:
+// live update; live Tabellen Berechnung/calculation
 for (let p = 1; p <= numberOfPilots; p++) {
   setupLiveCalculation(p, numberOfRowsPilots);
 }
+
 
 //-------------------Automatisches Array Pilot Names---------------------------
 
@@ -58,9 +55,7 @@ let pilotNames = [];
 function updateArrayPilotNames() {
   pilotNames = [];
 
-  // Anzahl der bekannten Namen
-  const numberOfPilots = 10; // anpassen je nach Anzahl
-
+  // Anzahl der Piloten; numberOfPilots; siehe oben, const ---------------
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`pilotName${i}`);
     pilotNames.push(cell.textContent.trim());
@@ -71,7 +66,7 @@ function updateArrayPilotNames() {
         pilotNames[i] = cell.textContent.trim();
         updatePilotParagraph();
         updatePilotHeadlines();      // 👈 Jetzt wird der Titel live aktualisiert!
-        console.log("Array aktualisiert:", pilotNames);
+        console.log("pilotNames Array aktualisiert:", pilotNames);
       });
       cell.dataset.listenerAdded = "true";
     }
@@ -88,9 +83,7 @@ let pilotRank = [];
 function updateArrayPilotRank() {
   pilotRank = [];
 
-  // Anzahl der bekannten Namen
-  const numberOfPilots = 10; // anpassen je nach Anzahl
-
+  // Anzahl der Piloten; numberOfPilots; siehe oben, const ---------------
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`rankPilot${i}`);
     pilotRank.push(cell.textContent.trim());
@@ -101,7 +94,7 @@ function updateArrayPilotRank() {
         pilotRank[i] = cell.textContent.trim();
         updatePilotParagraphRank();   // jetzt wird der Rank in html/Tabellen id angezeigt
         updatePilotHeadlines();      // 👈 Jetzt wird der Titel live aktualisiert!
-        console.log("Array aktualisiert:", pilotRank);
+        console.log("pilotRank Array aktualisiert:", pilotRank);
       });
       cell.dataset.listenerAdded = "true";
     }
@@ -113,23 +106,21 @@ updateArrayPilotRank(); // <-- Jetzt aktiv!
 
 //-------------------Automatisches Array notify-email der Piloten------------------
 
-let NotifyEmailPilots = [];
+let notifyEmailPilots = [];
 
 function updateArrayNotifyEmail() {
-  NotifyEmailPilots = [];
+  notifyEmailPilots = [];
 
-  // Anzahl der bekannten Namen
-  const numberOfPilots = 10; // anpassen je nach Anzahl
-
+  // Anzahl der Piloten; numberOfPilots; siehe oben, const ---------------
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`notifyEmailPilot${i}`);
-    NotifyEmailPilots.push(cell.textContent.trim());
+    notifyEmailPilots.push(cell.textContent.trim());
 
     // Event nur einmal hinzufügen
     if (!cell.dataset.listenerAdded) {
       cell.addEventListener("input", () => {
-        NotifyEmailPilots[i] = cell.textContent.trim();
-        console.log("Array aktualisiert:", NotifyEmailPilots);
+        notifyEmailPilots[i] = cell.textContent.trim();
+        console.log("notifyEmailPilots Array aktualisiert:", notifyEmailPilots);
       });
       cell.dataset.listenerAdded = "true";
     }
@@ -221,10 +212,7 @@ function updatePilotDropdownFromTable() {
 }
 
 
-//------------------Automatische update der Tabelle------------
-
-// Initial berechnen:
-// updateAllPilots(numberOfPilots, numberOfRowsPilots);
+//------------------Automatische update der Piloten Tabelle------------
 
 // Optional live:
 for (let p = 1; p <= numberOfPilots; p++) {
@@ -331,7 +319,7 @@ function updatePilotTable(pilotNumber, numberOfRows) {
 }
 
 
-// ⚡ Optional: Live-Berechnung aktivieren
+//  Live-Berechnung aktivieren
 function setupLiveCalculation(pilotNumber, numberOfRows) {
   for (let row = 1; row <= numberOfRows; row++) {
     const input = document.getElementById(`lastCheckLiLane${row}Pilot${pilotNumber}`);
@@ -355,10 +343,8 @@ let fixedDetailItems = [];
 function updateDetailArrayFromIds() {
   fixedDetailItems = [];
 
-  // Anzahl der bekannten Namen
-  const numberOfItems = 8; // anpassen je nach Anzahl
-
-  for (let i = 0; i < numberOfItems; i++) {
+  //const numberOfFixItems = 8; Fix-Detail-Items; siehe oben
+  for (let i = 0; i < numberOfFixItems; i++) {
     const cell = document.getElementById(`fixedDetailedItem${i}`);
     fixedDetailItems.push(cell.textContent.trim());
 

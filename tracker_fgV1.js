@@ -50,7 +50,7 @@ for (let p = 1; p <= numberOfPilots; p++) {
 
 let pilotNames = [];
 
-function updateArrayFromIds() {
+function updateArrayPilotNames() {
   pilotNames = [];
 
   // Anzahl der bekannten Namen
@@ -73,14 +73,14 @@ function updateArrayFromIds() {
   }
 }
 
-updateArrayFromIds(); // <-- Jetzt aktiv!
+updateArrayPilotNames(); // <-- Jetzt aktiv!
 
 
-//-------------------Automatisches Array Pilot Rank---------fg------------------
+//-------------------Automatisches Array Pilot Rank---------------------------
 
 let pilotRank = [];
 
-function updateRankArrayFromIds() {
+function updateArrayPilotRank() {
   pilotRank = [];
 
   // Anzahl der bekannten Namen
@@ -103,36 +103,35 @@ function updateRankArrayFromIds() {
   }
 }
 
-updateRankArrayFromIds(); // <-- Jetzt aktiv!
+updateArrayPilotRank(); // <-- Jetzt aktiv!
 
 
-//-------------------Automatisches Array Pilot ID---------fg------------------
+//-------------------Automatisches Array notify-email der Piloten------------------
 
-let companyID = [];
+let NotifyEmailPilots = [];
 
-function updateIDArrayFromIds() {
-  companyID = [];
+function updateArrayNotifyEmail() {
+  NotifyEmailPilots = [];
 
   // Anzahl der bekannten Namen
   const numberOfPilots = 10; // anpassen je nach Anzahl
 
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`notifyEmailPilot${i}`);
-    companyID.push(cell.textContent.trim());
+    NotifyEmailPilots.push(cell.textContent.trim());
 
     // Event nur einmal hinzufügen
     if (!cell.dataset.listenerAdded) {
       cell.addEventListener("input", () => {
-        companyID[i] = cell.textContent.trim();
-        updatePilotHeadlines();      // 👈 Jetzt wird der Titel live aktualisiert!
-        console.log("Array aktualisiert:", companyID);
+        NotifyEmailPilots[i] = cell.textContent.trim();
+        console.log("Array aktualisiert:", NotifyEmailPilots);
       });
       cell.dataset.listenerAdded = "true";
     }
   }
 }
 
-updateIDArrayFromIds(); // <-- Jetzt aktiv!
+updateArrayNotifyEmail(); // <-- Jetzt aktiv!
 
 
 //-----------------Update der Headlines-----------------------------
@@ -142,7 +141,7 @@ function updatePilotHeadlines() {
     const headline = document.getElementById(`headPilot${i + 1}`);
     if (headline) {
       const spacer = "\u2003"; // EM SPACE
-      headline.textContent = pilotNames[i] + spacer + "|" + spacer + pilotRank[i] + spacer + "|" + spacer + companyID[i];
+      headline.textContent = pilotNames[i] + spacer + "|" + spacer + pilotRank[i];
     }
   }
 }
@@ -606,10 +605,10 @@ function loadTablePilotList() {
         console.log("Keine gespeicherten Daten für Pilot-List gefunden.");
     }
 
-    updateRankArrayFromIds();
-    updateIDArrayFromIds();
+    updateArrayPilotRank();
+    updateArrayNotifyEmail();
     //updateDetailArrayFromIds();
-    updateArrayFromIds();
+    updateArrayPilotNames();
     updatePilotHeadlines();
     updatePilotParagraph();
     updatePilotParagraphRank();

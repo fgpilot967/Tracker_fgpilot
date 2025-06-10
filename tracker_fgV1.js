@@ -198,7 +198,7 @@ function updatePilotDropdownFromTable() {
   const pilotDropdown = document.getElementById("pilotDropdown");
   pilotDropdown.innerHTML = ""; // Vorher leeren
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`pilotName${i}`);
     const name = cell?.textContent.trim() || `Pilot ${i + 1}`;
 
@@ -214,7 +214,7 @@ function updatePilotDropdownFromTable() {
 
 //------------------Automatische update der Piloten Tabelle------------
 
-// Optional live:
+// live update
 for (let p = 1; p <= numberOfPilots; p++) {
   setupLiveCalculation(p, numberOfRowsPilots);
 }
@@ -280,11 +280,11 @@ function calculateRow(pilotNumber, rowNumber) {
   const licenseName = licenseCell ? licenseCell.textContent.trim() : "your license";
 
   const recipient = `pilot${pilotNumber}@abc.com`; // oder aus deinem Array: pilotEmail[pilotNumber - 1]
-  const ccRecipient = 'xxx@abc.com, xyz@abc.com';
+  const ccRecipient = 'xxx@abc.com, xyz@abc.com'; // cc noch nicht definiert
 
   function sendEmail(remDays, checkboxId) {
     const subject = `Automated Email - ${licenseName}`;
-    const body = `Your ${licenseName} is going to expire. ${remDays} days left. Please contact xxx.`;
+    const body = `Your ${licenseName} is going to expire. ${remDays} days left. Please contact xxx.`; // ...please contact OPS Büro?
     const mailtoLink = `mailto:${recipient}?cc=${encodeURIComponent(ccRecipient)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
     document.getElementById(checkboxId).checked = true;
@@ -365,7 +365,7 @@ updateDetailArrayFromIds();
 
 
 
-//---------------Insert Vorgaben Pilot Detail Tabellen -------------
+//---------------Füge die Vorgaben in die Pilot Detail Tabellen -------------
 
 function insertFixedDetailItems(pilotNumber) {
   for (let i = 0; i < fixedDetailItems.length; i++) {
@@ -383,7 +383,7 @@ function insertFixedDetailItems(pilotNumber) {
 function createPilotDetailTable(pilotNumber) {
   const table = document.createElement('table');
   // Anzahl der fixen (nicht editierbaren) Zeilen
-  const numberOfFixedItems = 8;
+  // const numberOfFixedItems = 8;
   table.id = `detailTablePilot${pilotNumber}`;
 
   // Kopfzeile
@@ -395,9 +395,9 @@ function createPilotDetailTable(pilotNumber) {
   `;
   
   // Datenzeilen
-  for (let i = 1; i <= 12; i++) {
+  for (let i = 1; i <= numberOfRowsDetail; i++) {
     const row = document.createElement('tr');
-    const isFixed = i <= numberOfFixedItems;
+    const isFixed = i <= numberOfFixItems;
     row.innerHTML = `
       <td ${isFixed ? "" + 'class="fixItem"' + 'title="Fix Item from Setup"': 'contenteditable="true"'} class="detailTable" id="itemDetailLane${i}Pilot${pilotNumber}"></td>
       <td contenteditable="true" class="detailTable" id="inputDetailLane${i}Pilot${pilotNumber}"></td>
@@ -409,7 +409,7 @@ function createPilotDetailTable(pilotNumber) {
 }
 
 
-//------------------Create Pilot Company Table----------------------------
+//------------------Create Pilot Company Table (Initial-Task-Item)----------------------------
 
 function createPilotCompanyTable(pilotNumber) {
   const table = document.createElement('table');
@@ -425,10 +425,11 @@ function createPilotCompanyTable(pilotNumber) {
   `;
   
   // Datenzeilen
-  for (let i = 1; i <= 15; i++) {
+  for (let i = 1; i <= numberOfRowsTask; i++) {
     const row = document.createElement('tr');
+    const isFixed = i <= numberOfFixedInitial;
     row.innerHTML = `
-      <td contenteditable="true" class="detailTable" id="itemCompanyLane${i}Pilot${pilotNumber}"></td>
+      <td ${isFixed ? "" + 'class="fixItem"' + 'title="Fix Task from Setup"': 'contenteditable="true"'} class="detailTable" id="itemCompanyLane${i}Pilot${pilotNumber}"></td>
       <td><input type="date" class="inputDate" id="dateCompanyLane${i}Pilot${pilotNumber}"></td>
       <td><input type="checkbox" value="passed" id="itemCompanyPassedLane${i}Pilot${pilotNumber}"></td>
     `;
@@ -438,6 +439,8 @@ function createPilotCompanyTable(pilotNumber) {
   return table;
 }
 
+
+// Den Pilot Detail Container erstellen und die beiden Tabellen einschreiben/erzeugen (Info and Initial-Task)---------
 
 const detailContainer = document.getElementById('pilotDetailsContainer');
 

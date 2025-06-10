@@ -6,7 +6,7 @@ const numberOfRowsPilots = 15; // Anzahl der Reihen pro Pilotentabelle
 const numberOfRowsDetail = 15; // Anzahl der Reihen der Info-Item / Detail Tabellen
 const numberOfRowsTask = 15; // Anzahl der Reihen der Initial-Task-Item Tabellen
 const numberOfFixItems = 8; // Anzahl der Fix-Items in der Fix-Detail-Item Tabelle
-const numberOfFixedInitial = 8; // Anzahl der Fix-Initial-Task-Items
+const numberOfFixTask = 8; // Anzahl der Fix-Initial-Task-Items
 
 
 function openTab(evt, tabName) {
@@ -378,6 +378,51 @@ function insertFixedDetailItems(pilotNumber) {
 }
 
 
+//-------------------Automatisches Array Fix Initial Task Items---------------------------
+
+let fixedTaskItems = [];
+
+function updateArrayFixTask() {
+  fixedTaskItems = [];
+
+  //const numberOfFixItems = 8; Fix-Detail-Items; siehe oben
+  for (let i = 0; i < numberOfFixTask; i++) {
+    const cell = document.getElementById(`fixedInitialTaskItem${i}`);
+    fixedTaskItems.push(cell.textContent.trim());
+
+    // Event nur einmal hinzufügen
+    if (!cell.dataset.listenerAdded) {
+      cell.addEventListener("input", () => {
+        fixedTaskItems[i] = cell.textContent.trim();
+        for (let p = 1; p <= numberOfPilots; p++) {
+        insertFixedTaskItems(p);
+        }
+        console.log("Fix Task Array aktualisiert:", fixedTaskItems);
+      });
+      cell.dataset.listenerAdded = "true";
+    }
+  }
+}
+updateArrayFixTask();
+
+
+
+//---------------Füge die Vorgaben in die Pilot Initial-Task Tabellen -------------
+
+function insertFixedTaskItems(pilotNumber) {
+  for (let i = 0; i < fixedTaskItems.length; i++) {
+    const cellId = `itemCompanyLane${i + 1}Pilot${pilotNumber}`;
+    const cell = document.getElementById(cellId);
+    if (cell) {
+      cell.textContent = fixedTaskItems[i];
+    }
+  }
+}
+
+
+
+
+
 //------------------Create Pilot Details Table----------------------------
 
 function createPilotDetailTable(pilotNumber) {
@@ -427,7 +472,7 @@ function createPilotCompanyTable(pilotNumber) {
   // Datenzeilen
   for (let i = 1; i <= numberOfRowsTask; i++) {
     const row = document.createElement('tr');
-    const isFixed = i <= numberOfFixedInitial;
+    const isFixed = i <= numberOfFixTask;
     row.innerHTML = `
       <td ${isFixed ? "" + 'class="fixItem"' + 'title="Fix Task from Setup"': 'contenteditable="true"'} class="detailTable" id="itemCompanyLane${i}Pilot${pilotNumber}"></td>
       <td><input type="date" class="inputDate" id="dateCompanyLane${i}Pilot${pilotNumber}"></td>
@@ -655,6 +700,56 @@ function loadTableFixItems() {
 
     for (let pilotNumber = 1; pilotNumber <= numberOfPilots; pilotNumber++) {
     insertFixedDetailItems(pilotNumber);
+    }
+    
+}
+
+// Funktion zum Speichern der Pilot-Fix-Task-Tabelle -------------------
+function saveTableFixTasks() {
+    const table = document.getElementById("fixTablePilotInitialTask");
+    const rows = table.rows;
+    const tableData = [];
+
+    for (let i = 1; i < rows.length; i++) {  // i=1 um Kopfzeile zu überspringen
+        const rowData = [];
+        for (let j = 0; j < rows[i].cells.length; j++) {
+            const cell = rows[i].cells[j];
+            rowData.push(cell.textContent.trim()); // 🔁 DAS hat gefehlt! push den cell.textcontent in das rowData
+        }
+        tableData.push(rowData); // push das rowData-Array in das tableData-Array
+    }
+
+    localStorage.setItem("TableTaskItems", JSON.stringify(tableData));
+    console.log("✅ Pilot-Fix-Tasks gespeichert");
+}
+
+
+// Funktion zum Laden der Pilot-Fix-Task-Tabelle--------------------
+function loadTableFixTasks() {
+    const table = document.getElementById("fixTablePilotInitialTask");
+    const storedData = JSON.parse(localStorage.getItem("TableTaskItems"));
+
+    if (storedData) {
+        for (let i = 1; i < table.rows.length; i++) {
+            const row = table.rows[i];
+            const rowData = storedData[i - 1]; // 📌 Index aus gespeichertem Array
+
+            if (rowData) {
+                for (let j = 0; j < row.cells.length; j++) {
+                    row.cells[j].textContent = rowData[j] || "";
+                }
+            }
+        }
+        console.log("✅ Pilot-Fix-Tasks geladen");
+    } else {
+        console.log("Keine gespeicherten Daten für Pilot-Fix-Tasks gefunden.");
+    }
+
+    
+    updateArrayFixTask();
+
+    for (let pilotNumber = 1; pilotNumber <= numberOfPilots; pilotNumber++) {
+    insertFixedTaskItems(pilotNumber);
     }
     
 }

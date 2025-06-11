@@ -42,9 +42,9 @@ function openTab(evt, tabName) {
 //-----------------Initial für die Berechnung---------------------------
 
 // live update; live Tabellen Berechnung/calculation
-for (let p = 1; p <= numberOfPilots; p++) {
-  setupLiveCalculation(p, numberOfRowsPilots);
-}
+//for (let p = 1; p <= numberOfPilots; p++) {
+  //setupLiveCalculation(p, numberOfRowsPilots);
+//}
 
 
 //-------------------Automatisches Array Pilot Names---------------------------
@@ -642,11 +642,8 @@ function loadTablePilotList() {
 
     updateArrayPilotRank();
     updateArrayNotifyEmail();
-    //updateDetailArrayFromIds();
     updateArrayPilotNames();
     updatePilotHeadlines();
-    updatePilotParagraph();
-    updatePilotParagraphRank();
 }
 
 

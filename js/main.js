@@ -9,6 +9,33 @@ const numberOfFixItems = 8; // Anzahl der Fix-Items in der Fix-Detail-Item Tabel
 const numberOfFixTask = 8; // Anzahl der Fix-Initial-Task-Items
 
 
+
+// main.js
+import { loadAllPilotTables, saveAllPilotTables } from './storage.js';
+
+// Beispiel-Wrapper für update-Funktion (kommt aus späterem Modul)
+function updateAllPilotsWrapper() {
+  // später aus calculation.js importieren
+  console.log("🔁 Dummy updateAllPilots aufgerufen (noch nicht verlinkt)");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  loadAllPilotTables(updateAllPilotsWrapper);
+});
+
+// Beispiel: später bei Eingabe automatisch speichern
+// saveAllPilotTables(); // kannst du später aus Event-Handlern aufrufen
+
+import { openTab, updatePilotDropdownFromTable } from './ui.js';
+
+// Diese Zeile fehlt (und löst dein Problem):
+window.updatePilotDropdownFromTable = updatePilotDropdownFromTable;
+
+window.openTab = openTab;
+
+
+
+/*
 function openTab(evt, tabName) {
   const tabcontent = document.getElementsByClassName("tabcontent");
   for (let i = 0; i < tabcontent.length; i++) {
@@ -36,7 +63,7 @@ function openTab(evt, tabName) {
     if (active) active.style.display = "block";
   }
 }
-
+*/
 
 
 //-----------------Initial für die Berechnung---------------------------
@@ -190,7 +217,7 @@ for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
   container.appendChild(wrapper);
 }
 
-
+/*
 //---------------DropDown (Piloten) automatische Namen---------
 
 function updatePilotDropdownFromTable() {
@@ -209,7 +236,7 @@ function updatePilotDropdownFromTable() {
     pilotDropdown.appendChild(a);
   }
 }
-
+*/
 
 //------------------Automatische update der Piloten Tabelle------------
 
@@ -508,14 +535,18 @@ for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
 
 
 
+
+
+
+
 //---------------hier wird die Funktion (fixe Werte in Pilot Detail Tabelle) aufgerufen--------
 
-for (let pilotNumber = 1; pilotNumber <= numberOfPilots; pilotNumber++) {
-  insertFixedDetailItems(pilotNumber);
-}
+//for (let pilotNumber = 1; pilotNumber <= numberOfPilots; pilotNumber++) {
+  //insertFixedDetailItems(pilotNumber);
+//}
 
 
-
+/*
 //-------------local storage - pilotTablesContainer - für jede Tabelle - Zelle für Zelle---------------
 
 
@@ -595,7 +626,7 @@ function loadAllPilotTables() {
   updateAllPilots(numberOfPilots, numberOfRowsPilots);
   console.log("✅ Piloten-Tabellen erfolgreich wiederhergestellt.");
 }
-
+*/
 
 
 

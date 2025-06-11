@@ -26,7 +26,6 @@ function openTab(evt, tabName) {
   // Wenn es sich um einen Pilotentab handelt (z. B. "pilot3")
   if (tabName.startsWith("pilot")) {
     const pilotNumber = parseInt(tabName.replace("pilot", ""));
-    const numberOfPilots = 10; // ggf. global oder dynamisch machen
 
     for (let i = 1; i <= numberOfPilots; i++) {
       const wrapper = document.getElementById(`pilotWrapper${i}`);
@@ -305,23 +304,23 @@ function calculateRow(pilotNumber, rowNumber) {
 
 
 // 🔄 Aktualisiere ALLE Piloten
-function updateAllPilots(numberOfPilots, numberOfRows) {
+function updateAllPilots(numberOfPilots, numberOfRowsPilots) {
   for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
-    updatePilotTable(pilot, numberOfRows);
+    updatePilotTable(pilot, numberOfRowsPilots);
   }
 }
 
 // 🔁 Aktualisiere alle Zeilen eines Piloten
-function updatePilotTable(pilotNumber, numberOfRows) {
-  for (let row = 1; row <= numberOfRows; row++) {
+function updatePilotTable(pilotNumber, numberOfRowsPilots) {
+  for (let row = 1; row <= numberOfRowsPilots; row++) {
     calculateRow(pilotNumber, row);
   }
 }
 
 
 //  Live-Berechnung aktivieren
-function setupLiveCalculation(pilotNumber, numberOfRows) {
-  for (let row = 1; row <= numberOfRows; row++) {
+function setupLiveCalculation(pilotNumber, numberOfRowsPilots) {
+  for (let row = 1; row <= numberOfRowsPilots; row++) {
     const input = document.getElementById(`lastCheckLiLane${row}Pilot${pilotNumber}`);
     if (input) {
       input.addEventListener("change", () => calculateRow(pilotNumber, row));
@@ -596,7 +595,6 @@ function loadAllPilotTables() {
   updateAllPilots(numberOfPilots, numberOfRowsPilots);
   console.log("✅ Piloten-Tabellen erfolgreich wiederhergestellt.");
 }
-
 
 
 

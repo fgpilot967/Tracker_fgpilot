@@ -59,14 +59,6 @@ export function calculateRow(pilotNumber, rowNumber) {
   if (diffDays <= 30 && !document.getElementById(cb30)?.checked) {
     sendEmail(30, licenseName, pilotNumber, cb30);
   }
-
-// test
-if (pilotNumber === 2) {
-  console.log(`[DEBUG] P2, Row ${rowNumber} – Diff: ${diffDays}`);
-  console.log(`[DEBUG] Checkbox90 exists:`, document.getElementById(cb90));
-  console.log(`[DEBUG] Checkbox90 checked:`, document.getElementById(cb90)?.checked);
-}
-
 }
 
 export function updatePilotTable(pilotNumber, numberOfRowsPilots) {

@@ -89,10 +89,27 @@ window.updateAllPilots = () => updateAllPilots(numberOfPilots, numberOfRowsPilot
 
 import { attachSaveTriggers } from './events.js';
 
+import {
+  pilotNames, updateArrayPilotNames,
+  pilotRank, updateArrayPilotRank,
+  notifyEmailPilots, updateArrayNotifyEmail,
+  fixedDetailItems, updateDetailArrayFromIds,
+  insertFixedDetailItems,
+  fixedTaskItems, updateArrayFixTask,
+  insertFixedTaskItems
+} from './arrays.js';
+
+
 window.addEventListener("DOMContentLoaded", () => {
   loadAllPilotTables(() => {
     updateAllPilots(numberOfPilots, numberOfRowsPilots);
     attachSaveTriggers(); // 👈 hier einfügen
+    updateArrayPilotNames(numberOfPilots);
+    console.log("Pilot Names Array:", pilotNames);
+    updateArrayPilotRank(numberOfPilots);
+    updateArrayNotifyEmail(numberOfPilots);
+    updateDetailArrayFromIds(numberOfFixItems, numberOfPilots);
+    updateArrayFixTask(numberOfFixTask);
   });
 });
 
@@ -137,7 +154,7 @@ function openTab(evt, tabName) {
   //setupLiveCalculation(p, numberOfRowsPilots);
 //}
 
-
+/*
 //-------------------Automatisches Array Pilot Names---------------------------
 
 let pilotNames = [];
@@ -218,7 +235,7 @@ function updateArrayNotifyEmail() {
 }
 
 updateArrayNotifyEmail(); // <-- Jetzt aktiv!
-
+*/
 
 //-----------------Update der Headlines-----------------------------
 
@@ -425,7 +442,7 @@ function setupLiveCalculation(pilotNumber, numberOfRowsPilots) {
 }
 
 
-
+/*
 //-------------------Automatisches Array Fix Detail Items---------------------------
 
 let fixedDetailItems = [];
@@ -509,7 +526,7 @@ function insertFixedTaskItems(pilotNumber) {
   }
 }
 
-
+*/
 
 
 /*

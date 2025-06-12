@@ -2,13 +2,51 @@
 //----------------- allgemeine CONST-anten ----------------
 
 const numberOfPilots = 10; // Pilotenzahl zur Erstellung der Tabellen
+
+
+const numberOfFixTask = 8; // Anzahl der Fix-Initial-Task-Items
+
+
+import {
+  createPilotTable,
+  createPilotDetailTable,
+  createPilotCompanyTable
+} from './pilotTables.js';
+
 const numberOfRowsPilots = 15; // Anzahl der Reihen pro Pilotentabelle
 const numberOfRowsDetail = 15; // Anzahl der Reihen der Info-Item / Detail Tabellen
 const numberOfRowsTask = 15; // Anzahl der Reihen der Initial-Task-Item Tabellen
 const numberOfFixItems = 8; // Anzahl der Fix-Items in der Fix-Detail-Item Tabelle
-const numberOfFixTask = 8; // Anzahl der Fix-Initial-Task-Items
 
 
+// Tabellen erzeugen und anhängen
+const container = document.getElementById('pilotTablesContainer');
+for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
+  const wrapper = document.createElement('div');
+  wrapper.appendChild(createPilotTable(pilot, numberOfRowsPilots));
+  container.appendChild(wrapper);
+}
+
+
+const detailContainer = document.getElementById('pilotDetailsContainer');
+
+for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
+  const wrapper = document.createElement('div');
+  wrapper.id = `pilotWrapper${pilot}`;
+  wrapper.className = "tabcontent"; // optional, für Tab-Logik
+  wrapper.style.display = "none";
+
+  const subWrapper = document.createElement('div');
+  subWrapper.style.display = "flex";
+  subWrapper.style.alignItems = "flex-start"; // passt die folgende Tabelle nicht der vorherigen an
+  subWrapper.style.gap = "300px";
+  subWrapper.appendChild(createPilotDetailTable(pilot, numberOfRowsDetail, numberOfFixItems));
+  subWrapper.appendChild(createPilotCompanyTable(pilot, numberOfRowsTask, numberOfFixItems));
+  wrapper.appendChild(subWrapper);
+
+  detailContainer.appendChild(wrapper);
+ 
+}
 
 // main.js
 import { loadAllPilotTables, saveAllPilotTables } from './storage.js';
@@ -32,6 +70,19 @@ import { openTab, updatePilotDropdownFromTable } from './ui.js';
 window.updatePilotDropdownFromTable = updatePilotDropdownFromTable;
 
 window.openTab = openTab;
+
+
+import {
+  calculateRow,
+  updatePilotTable,
+  updateAllPilots
+} from './calculation.js';
+
+window.updateAllPilots = () => updateAllPilots(numberOfPilots, numberOfRowsPilots);
+
+
+
+
 
 
 
@@ -168,7 +219,7 @@ function updatePilotHeadlines() {
   }
 }
 
-
+/*
 //------------------Create Pilot-Table----------------------------
 
 function createPilotTable(pilotNumber) {
@@ -208,14 +259,9 @@ function createPilotTable(pilotNumber) {
 
   return table;
 }
+*/
 
-// Tabellen erzeugen und anhängen
-const container = document.getElementById('pilotTablesContainer');
-for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
-  const wrapper = document.createElement('div');
-  wrapper.appendChild(createPilotTable(pilot));
-  container.appendChild(wrapper);
-}
+
 
 /*
 //---------------DropDown (Piloten) automatische Namen---------
@@ -265,7 +311,7 @@ function updatePilotParagraphRank() {
 
 //-------------Tabellen Berechnung--------------------
 
-
+/*
 // 📅 Datum formatiert als dd.mm.yyyy
 function formatDate(date) {
   const day = ("0" + date.getDate()).slice(-2);
@@ -273,7 +319,10 @@ function formatDate(date) {
   const year = date.getFullYear();
   return `${day}.${month}.${year}`;
 }
+*/
 
+
+/*
 // 🧮 Berechne eine Zeile (Pilot & Zeilennummer)
 function calculateRow(pilotNumber, rowNumber) {
   const lastCheckInput = document.getElementById(`lastCheckLiLane${rowNumber}Pilot${pilotNumber}`);
@@ -328,7 +377,9 @@ function calculateRow(pilotNumber, rowNumber) {
     if (!document.getElementById(cb90).checked) sendEmail(90, cb90);
   }
 }
+*/
 
+/*
 
 // 🔄 Aktualisiere ALLE Piloten
 function updateAllPilots(numberOfPilots, numberOfRowsPilots) {
@@ -343,7 +394,7 @@ function updatePilotTable(pilotNumber, numberOfRowsPilots) {
     calculateRow(pilotNumber, row);
   }
 }
-
+*/
 
 //  Live-Berechnung aktivieren
 function setupLiveCalculation(pilotNumber, numberOfRowsPilots) {
@@ -448,7 +499,7 @@ function insertFixedTaskItems(pilotNumber) {
 
 
 
-
+/*
 //------------------Create Pilot Details Table----------------------------
 
 function createPilotDetailTable(pilotNumber) {
@@ -509,29 +560,11 @@ function createPilotCompanyTable(pilotNumber) {
 
   return table;
 }
-
+*/
 
 // Den Pilot Detail Container erstellen und die beiden Tabellen einschreiben/erzeugen (Info and Initial-Task)---------
 
-const detailContainer = document.getElementById('pilotDetailsContainer');
 
-for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
-  const wrapper = document.createElement('div');
-  wrapper.id = `pilotWrapper${pilot}`;
-  wrapper.className = "tabcontent"; // optional, für Tab-Logik
-  wrapper.style.display = "none";
-
-  const subWrapper = document.createElement('div');
-  subWrapper.style.display = "flex";
-  subWrapper.style.alignItems = "flex-start"; // passt die folgende Tabelle nicht der vorherigen an
-  subWrapper.style.gap = "300px";
-  subWrapper.appendChild(createPilotDetailTable(pilot));
-  subWrapper.appendChild(createPilotCompanyTable(pilot));
-  wrapper.appendChild(subWrapper);
-
-  detailContainer.appendChild(wrapper);
- 
-}
 
 
 

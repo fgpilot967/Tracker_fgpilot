@@ -78,10 +78,23 @@ import {
   updateAllPilots
 } from './calculation.js';
 
+loadAllPilotTables(() => {
+  setTimeout(() => {
+    updateAllPilots(numberOfPilots, numberOfRowsPilots);
+  }, 50); // 50–100 ms reichen meist aus
+});
+
 window.updateAllPilots = () => updateAllPilots(numberOfPilots, numberOfRowsPilots);
 
 
+import { attachSaveTriggers } from './events.js';
 
+window.addEventListener("DOMContentLoaded", () => {
+  loadAllPilotTables(() => {
+    updateAllPilots(numberOfPilots, numberOfRowsPilots);
+    attachSaveTriggers(); // 👈 hier einfügen
+  });
+});
 
 
 

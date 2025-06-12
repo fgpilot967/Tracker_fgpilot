@@ -2,6 +2,8 @@
 
 // calculation.js
 
+import { sendEmail } from './email.js';
+
 function formatDate(date) {
   const day = ("0" + date.getDate()).slice(-2);
   const month = ("0" + (date.getMonth() + 1)).slice(-2);
@@ -9,7 +11,7 @@ function formatDate(date) {
   return `${day}.${month}.${year}`;
 }
 
-import { sendEmail } from './email.js';
+
 
 export function calculateRow(pilotNumber, rowNumber) {
   const dateInput = document.getElementById(`lastCheckLiLane${rowNumber}Pilot${pilotNumber}`);
@@ -34,6 +36,8 @@ export function calculateRow(pilotNumber, rowNumber) {
   const diffDays = Math.ceil(diffTime / (1000 * 3600 * 24));
   remDaysCell.textContent = diffDays;
 
+  remDaysCell.style.backgroundColor =
+    diffDays <= 0 ? "lightcoral" : diffDays <= 60 ? "yellow" : diffDays <= 90 ? "lightyellow" : "rgb(168, 185, 170)";
 
   
     // innerhalb von calculateRow():
@@ -46,13 +50,22 @@ export function calculateRow(pilotNumber, rowNumber) {
   const cb90 = `emailSent90LiLane${rowNumber}Pilot${pilotNumber}`;
 
   // 📬 Automatisch senden
-  if (diffDays <= 30 && !document.getElementById(cb30)?.checked) {
-    sendEmail(30, licenseName, pilotNumber, cb30);
-  } else if (diffDays <= 60 && !document.getElementById(cb60)?.checked) {
-    sendEmail(60, licenseName, pilotNumber, cb60);
-  } else if (diffDays <= 90 && !document.getElementById(cb90)?.checked) {
+  if (diffDays <= 90 && !document.getElementById(cb90)?.checked) {
     sendEmail(90, licenseName, pilotNumber, cb90);
   }
+  if (diffDays <= 60 && !document.getElementById(cb60)?.checked) {
+    sendEmail(60, licenseName, pilotNumber, cb60);
+  }
+  if (diffDays <= 30 && !document.getElementById(cb30)?.checked) {
+    sendEmail(30, licenseName, pilotNumber, cb30);
+  }
+
+// test
+if (pilotNumber === 2) {
+  console.log(`[DEBUG] P2, Row ${rowNumber} – Diff: ${diffDays}`);
+  console.log(`[DEBUG] Checkbox90 exists:`, document.getElementById(cb90));
+  console.log(`[DEBUG] Checkbox90 checked:`, document.getElementById(cb90)?.checked);
+}
 
 }
 

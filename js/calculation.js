@@ -12,6 +12,7 @@ function formatDate(date) {
 }
 
 
+//---------------Tabellen Kalkulation-----
 
 export function calculateRow(pilotNumber, rowNumber) {
   const dateInput = document.getElementById(`lastCheckLiLane${rowNumber}Pilot${pilotNumber}`);
@@ -61,16 +62,21 @@ export function calculateRow(pilotNumber, rowNumber) {
   }
 }
 
-export function updatePilotTable(pilotNumber, numberOfRowsPilots) {
-  for (let row = 1; row <= numberOfRowsPilots; row++) {
-    calculateRow(pilotNumber, row);
-  }
-}
 
 export function updateAllPilots(numberOfPilots, numberOfRowsPilots) {
   for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
     updatePilotTable(pilot, numberOfRowsPilots);
   }
 }
+
+
+export function updatePilotTable(pilotNumber, numberOfRowsPilots) {
+  for (let row = 1; row <= numberOfRowsPilots; row++) {
+    calculateRow(pilotNumber, row);
+  }
+}
+
+
+
 
 

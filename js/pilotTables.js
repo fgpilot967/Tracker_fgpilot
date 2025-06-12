@@ -3,6 +3,7 @@
 // pilotTables.js
 
 
+//--------------------Piloten Tabellen--------------------
 
 export function createPilotTable(pilotNumber, numberOfRowsPilots) {
   const table = document.createElement('table');
@@ -40,6 +41,9 @@ export function createPilotTable(pilotNumber, numberOfRowsPilots) {
   return table;
 }
 
+
+//--------------------Detail Tabelle---------------
+
 export function createPilotDetailTable(pilotNumber, numberOfRowsDetail, numberOfFixItems) {
   const table = document.createElement('table');
   table.id = `detailTablePilot${pilotNumber}`;
@@ -63,6 +67,9 @@ export function createPilotDetailTable(pilotNumber, numberOfRowsDetail, numberOf
 
   return table;
 }
+
+
+//-------------------Initial-Task-Tabelle-----------------------
 
 export function createPilotCompanyTable(pilotNumber, numberOfRowsTask, numberOfFixTask) {
   const table = document.createElement('table');

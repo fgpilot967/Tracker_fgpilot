@@ -1,5 +1,6 @@
 
 // events.js
+
 import { saveAllPilotTables } from './storage.js';
 
 export function attachSaveTriggers() {

@@ -70,10 +70,8 @@ for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
 }
 
 
-//--------------Tabellen Laden / Speichern------------
 
-
-
+//   ?????????
 // Beispiel-Wrapper für update-Funktion (kommt aus späterem Modul)
 function updateAllPilotsWrapper() {
   // später aus calculation.js importieren
@@ -84,14 +82,6 @@ function updateAllPilotsWrapper() {
   //loadAllPilotTables(updateAllPilotsWrapper);
 //});
 
-// Beispiel: später bei Eingabe automatisch speichern
-// saveAllPilotTables(); // kannst du später aus Event-Handlern aufrufen
-
-
-
-
-
-
 
 
 loadAllPilotTables(() => {
@@ -99,6 +89,8 @@ loadAllPilotTables(() => {
     updateAllPilots(numberOfPilots, numberOfRowsPilots);
   }, 50); // 50–100 ms reichen meist aus
 });
+
+
 
 window.updateAllPilots = () => updateAllPilots(numberOfPilots, numberOfRowsPilots);
 
@@ -133,8 +125,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
 //------------------Automatische update der Piloten Tabelle------------
 
 // live update
@@ -158,8 +148,6 @@ function setupLiveCalculation(pilotNumber, numberOfRowsPilots) {
     }
   }
 }
-
-
 
 
 

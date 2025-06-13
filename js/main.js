@@ -18,6 +18,31 @@ import {
   createPilotCompanyTable
 } from './pilotTables.js';
 
+import { loadAllPilotTables, saveAllPilotTables } from './storage.js';
+
+import { openTab, updatePilotDropdownFromTable } from './ui.js';
+
+import {
+  calculateRow,
+  updatePilotTable,
+  updateAllPilots
+} from './calculation.js';
+
+import { attachSaveTriggers } from './events.js';
+
+import {
+  pilotNames, updateArrayPilotNames,
+  pilotRank, updateArrayPilotRank,
+  notifyEmailPilots, updateArrayNotifyEmail,
+  fixedDetailItems, updateDetailArrayFromIds,
+  insertFixedDetailItems, updatePilotHeadlines,
+  fixedTaskItems, updateArrayFixTask,
+  insertFixedTaskItems, updatePilotParagraph, updatePilotParagraphRank
+} from './arrays.js';
+
+
+
+
 // Tabellen erzeugen und anhängen
 const container = document.getElementById('pilotTablesContainer');
 for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
@@ -47,7 +72,7 @@ for (let pilot = 1; pilot <= numberOfPilots; pilot++) {
 
 //--------------Tabellen Laden / Speichern------------
 
-import { loadAllPilotTables, saveAllPilotTables } from './storage.js';
+
 
 // Beispiel-Wrapper für update-Funktion (kommt aus späterem Modul)
 function updateAllPilotsWrapper() {
@@ -62,19 +87,12 @@ function updateAllPilotsWrapper() {
 // Beispiel: später bei Eingabe automatisch speichern
 // saveAllPilotTables(); // kannst du später aus Event-Handlern aufrufen
 
-import { openTab, updatePilotDropdownFromTable } from './ui.js';
-
-// Diese Zeile fehlt (und löst dein Problem):
-window.updatePilotDropdownFromTable = updatePilotDropdownFromTable;
-
-window.openTab = openTab;
 
 
-import {
-  calculateRow,
-  updatePilotTable,
-  updateAllPilots
-} from './calculation.js';
+
+
+
+
 
 loadAllPilotTables(() => {
   setTimeout(() => {
@@ -84,46 +102,36 @@ loadAllPilotTables(() => {
 
 window.updateAllPilots = () => updateAllPilots(numberOfPilots, numberOfRowsPilots);
 
+window.updatePilotDropdownFromTable = updatePilotDropdownFromTable;
 
-import { attachSaveTriggers } from './events.js';
+window.openTab = openTab;
 
-import {
-  pilotNames, updateArrayPilotNames,
-  pilotRank, updateArrayPilotRank,
-  notifyEmailPilots, updateArrayNotifyEmail,
-  fixedDetailItems, updateDetailArrayFromIds,
-  insertFixedDetailItems,
-  fixedTaskItems, updateArrayFixTask,
-  insertFixedTaskItems, updatePilotParagraph, updatePilotParagraphRank
-} from './arrays.js';
+window.updatePilotHeadlines = updatePilotHeadlines;
+
+window.pilotNames = pilotNames;
+
+
 
 
 window.addEventListener("DOMContentLoaded", () => {
   loadAllPilotTables(() => {
     updateAllPilots(numberOfPilots, numberOfRowsPilots);
     attachSaveTriggers();
-    //okay 
+
     updateArrayPilotNames(numberOfPilots);
     updateArrayPilotRank(numberOfPilots);
     updateArrayNotifyEmail(numberOfPilots);
     updateDetailArrayFromIds(numberOfFixItems, numberOfPilots);
     updateArrayFixTask(numberOfFixTask, numberOfPilots);
+
+    updatePilotHeadlines();
+
   });
 });
 
 
 
-//-----------------Update der Headlines-----------------------------
 
-function updatePilotHeadlines() {
-  for (let i = 0; i < pilotNames.length; i++) {
-    const headline = document.getElementById(`headPilot${i + 1}`);
-    if (headline) {
-      const spacer = "\u2003"; // EM SPACE
-      headline.textContent = pilotNames[i] + spacer + "|" + spacer + pilotRank[i];
-    }
-  }
-}
 
 
 

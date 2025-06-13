@@ -1,4 +1,20 @@
 
+
+//-----------------Update der Headlines-----------------------------
+
+export function updatePilotHeadlines() {
+  console.log("Headlines aktualisiert");
+  for (let i = 0; i < pilotNames.length; i++) {
+    const headline = document.getElementById(`headPilot${i + 1}`);
+    if (headline) {
+      const spacer = "\u2003"; // EM SPACE
+      headline.textContent = pilotNames[i] + spacer + "|" + spacer + pilotRank[i];
+    }
+  }
+}
+
+
+
 //-------------------Automatisches Array Pilot Names---------------------------
 
 export let pilotNames = [];
@@ -17,7 +33,6 @@ export function updateArrayPilotNames(numberOfPilots) {
   
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`pilotName${i}`);
-    //pilotNames.push(cell.textContent.trim());
     const value = saved ? pilotNames[i] : cell.textContent.trim();
     pilotNames[i] = value;
     cell.textContent = value;
@@ -31,16 +46,16 @@ export function updateArrayPilotNames(numberOfPilots) {
           updatePilotParagraph(p);
         }
         console.log("pilotNames Array aktualisiert:", pilotNames);
+        updatePilotHeadlines();
       });
       cell.dataset.listenerAdded = "true";
     }
-  }
-  for (let p = 1; p <= numberOfPilots; p++) {
-    updatePilotParagraph(p);
-  }
+  }  
+  updatePilotParagraph();
 }
 
 export function updatePilotParagraph() {
+  console.log("Paragraph aktualisiert");
   for (let i = 0; i < pilotNames.length; i++) {
   const p = document.getElementById(`pilot${i + 1}Name`);
   if (p) p.textContent = pilotNames[i];
@@ -80,16 +95,16 @@ export function updateArrayPilotRank(numberOfPilots) {
           updatePilotParagraphRank(p);
         }
         console.log("pilotRank Array aktualisiert:", pilotRank);
+        updatePilotHeadlines();
       });
       cell.dataset.listenerAdded = "true";
     }
   }
-  for (let p = 1; p <= numberOfPilots; p++) {
-    updatePilotParagraphRank(p);
-  }
+  updatePilotParagraphRank();
 }
 
 export function updatePilotParagraphRank() {
+  console.log("Rank aktualisiert");
   for (let i = 0; i < pilotRank.length; i++) {
     const pRank = document.getElementById(`pilot${i + 1}Rank`);
     if (pRank) pRank.textContent = pilotRank[i];

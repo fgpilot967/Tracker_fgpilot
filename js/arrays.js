@@ -1,5 +1,5 @@
 
-
+console.log("Array.js geladen");
 //-----------------Update der Headlines-----------------------------
 
 export function updatePilotHeadlines() {

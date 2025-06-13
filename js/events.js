@@ -1,4 +1,6 @@
 
+console.log("events.js geladen");
+
 // events.js
 
 import { saveAllPilotTables } from './storage.js';

@@ -1,4 +1,7 @@
 
+
+console.log("storage.js geladen");
+
 // storage.js
 
 export function saveAllPilotTables() {

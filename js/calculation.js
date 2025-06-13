@@ -1,5 +1,5 @@
 
-
+console.log("calculation.js geladen");
 // calculation.js
 
 import { sendEmail } from './email.js';

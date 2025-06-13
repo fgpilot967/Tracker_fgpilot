@@ -10,7 +10,25 @@ const numberOfFixItems = 8; // Anzahl der Fix-Items in der Fix-Detail-Item Tabel
 const numberOfFixTask = 8; // Anzahl der Fix-Initial-Task-Items
 
 
-//-------------Tabellen-------------
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  loadAllPilotTables(() => {
+    updateAllPilots(numberOfPilots, numberOfRowsPilots);
+    attachSaveTriggers();
+
+    updateArrayPilotNames(numberOfPilots);
+    updateArrayPilotRank(numberOfPilots);
+    updateArrayNotifyEmail(numberOfPilots);
+    updateDetailArrayFromIds(numberOfFixItems, numberOfPilots);
+    updateArrayFixTask(numberOfFixTask, numberOfPilots);
+
+    updatePilotHeadlines();
+
+  });
+});
+
+
 
 import {
   createPilotTable,
@@ -101,26 +119,6 @@ window.openTab = openTab;
 window.updatePilotHeadlines = updatePilotHeadlines;
 
 window.pilotNames = pilotNames;
-
-
-
-
-window.addEventListener("DOMContentLoaded", () => {
-  loadAllPilotTables(() => {
-    updateAllPilots(numberOfPilots, numberOfRowsPilots);
-    attachSaveTriggers();
-
-    updateArrayPilotNames(numberOfPilots);
-    updateArrayPilotRank(numberOfPilots);
-    updateArrayNotifyEmail(numberOfPilots);
-    updateDetailArrayFromIds(numberOfFixItems, numberOfPilots);
-    updateArrayFixTask(numberOfFixTask, numberOfPilots);
-
-    updatePilotHeadlines();
-
-  });
-});
-
 
 
 

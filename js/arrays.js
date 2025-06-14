@@ -1,6 +1,18 @@
 
-console.log("Array.js geladen");
-//-----------------Update der Headlines-----------------------------
+/*
+ * arrays.js
+ * Enthält:
+ * 1. updatePilotHeadlines()
+ * 2. Pilot Data Arrays: pilotNames, pilotRank, notifyEmailPilots
+ * 3. Fixed Detail Items & Task Items
+ * Alle Funktionen greifen direkt auf DOM-Elemente zu & speichern in localStorage
+ */
+
+
+console.log("Arrays.js geladen");
+
+
+//-----------------Update der Piloten-Tabellen Headline-Anzeige-----------------------------
 
 export function updatePilotHeadlines() {
   console.log("Headlines aktualisiert");
@@ -14,8 +26,7 @@ export function updatePilotHeadlines() {
 }
 
 
-
-//-------------------Automatisches Array Pilot Names---------------------------
+//-------------------Pilot Names (Array & DOM)---------------------------
 
 export let pilotNames = [];
 
@@ -57,13 +68,13 @@ export function updateArrayPilotNames(numberOfPilots) {
 export function updatePilotParagraph() {
   console.log("Paragraph aktualisiert");
   for (let i = 0; i < pilotNames.length; i++) {
-  const p = document.getElementById(`pilot${i + 1}Name`);
-  if (p) p.textContent = pilotNames[i];
+    const p = document.getElementById(`pilot${i + 1}Name`);
+    if (p) p.textContent = pilotNames[i];
   }
 }
 
 
-//-------------------Automatisches Array Pilot Rank---------------------------
+//-------------------Pilot Rank (Array & DOM)---------------------------
 
 export let pilotRank = [];
 
@@ -81,7 +92,6 @@ export function updateArrayPilotRank(numberOfPilots) {
   
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`rankPilot${i}`);
-    //pilotRank.push(cell.textContent.trim());
     const value = saved ? pilotRank[i] : cell.textContent.trim();
     pilotRank[i] = value;
     cell.textContent = value;
@@ -112,7 +122,7 @@ export function updatePilotParagraphRank() {
 }
 
 
-//-------------------Automatisches Array notify-email der Piloten-------okay-----------
+//-------------------Notify-Emails der Piloten (Array & DOM)------------------
 
 export let notifyEmailPilots = [];
 
@@ -130,7 +140,6 @@ export function updateArrayNotifyEmail(numberOfPilots) {
   
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`notifyEmailPilot${i}`);
-    //notifyEmailPilots.push(cell.textContent.trim());
     const value = saved ? notifyEmailPilots[i] : cell.textContent.trim();
     notifyEmailPilots[i] = value;
     cell.textContent = value;
@@ -148,8 +157,7 @@ export function updateArrayNotifyEmail(numberOfPilots) {
 }
 
 
-
-//-------------------Automatisches Array Fix Detail Items-------okay--------------------
+//-------------------Fix Detail Items (Fix-Items for Pilot Details)---------------------------
 
 export let fixedDetailItems = [];
 
@@ -167,7 +175,6 @@ export function updateDetailArrayFromIds(numberOfFixItems, numberOfPilots) {
 
   for (let i = 0; i < numberOfFixItems; i++) {
     const cell = document.getElementById(`fixedDetailedItem${i}`);
-    //fixedDetailItems.push(cell.textContent.trim());
     const value = saved ? fixedDetailItems[i] : cell.textContent.trim();
     fixedDetailItems[i] = value;
     cell.textContent = value;
@@ -186,11 +193,9 @@ export function updateDetailArrayFromIds(numberOfFixItems, numberOfPilots) {
     }
   }
   for (let p = 1; p <= numberOfPilots; p++) {
-        insertFixedDetailItems(p);
+    insertFixedDetailItems(p);
   }
 }
-
-//---------------Füge die Vorgaben in die Pilot Detail Tabellen ------okay-------
 
 export function insertFixedDetailItems(p) {
   for (let i = 0; i < fixedDetailItems.length; i++) {
@@ -203,7 +208,7 @@ export function insertFixedDetailItems(p) {
 }
 
 
-//-------------------Automatisches Array Fix Initial Task Items----------okay-----------------
+//-------------------Fix Initial Task Items (for Pilot Details)---------------------------
 
 export let fixedTaskItems = [];
 
@@ -221,7 +226,6 @@ export function updateArrayFixTask(numberOfFixTask, numberOfPilots) {
   
   for (let i = 0; i < numberOfFixTask; i++) {
     const cell = document.getElementById(`fixedInitialTaskItem${i}`);
-    //fixedTaskItems.push(cell.textContent.trim());
     const value = saved ? fixedTaskItems[i] : cell.textContent.trim();
     fixedTaskItems[i] = value;
     cell.textContent = value;
@@ -243,9 +247,6 @@ export function updateArrayFixTask(numberOfFixTask, numberOfPilots) {
     insertFixedTaskItems(p);
   }
 }
-
-
-//---------------Füge die Vorgaben in die Pilot Initial-Task Tabellen ------okay-------
 
 export function insertFixedTaskItems(p) {
   for (let i = 0; i < fixedTaskItems.length; i++) {

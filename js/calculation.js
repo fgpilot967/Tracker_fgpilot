@@ -30,7 +30,7 @@ export function calculateRow(pilotNumber, rowNumber) {
   const expiryDate = new Date(lastCheck);
   expiryDate.setMonth(expiryDate.getMonth() + validity);
 
-  expiryCell.textContent = formatDate(expiryDate); // 👈 HIER eingesetzt
+  expiryCell.textContent = formatDate(expiryDate);
 
   const today = new Date();
   const diffTime = expiryDate.getTime() - today.getTime();

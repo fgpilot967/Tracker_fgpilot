@@ -65,19 +65,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
     detailContainer.appendChild(wrapper); 
   }
-
-  // Laden & Initialisieren
-  loadAllPilotTables(() => {
-    updateAllPilots(numberOfPilots, numberOfRowsPilots);
-    attachSaveTriggers();
-  });
 });
 
 
 //------------------🔁 Live-Berechnungen aktivieren ------------------//
-for (let p = 1; p <= numberOfPilots; p++) {
+setTimeout(() => {
+  for (let p = 1; p <= numberOfPilots; p++) {
   setupLiveCalculation(p, numberOfRowsPilots);
-}
+}}, 100);
+
 
 function setupLiveCalculation(pilotNumber, numberOfRowsPilots) {
   for (let row = 1; row <= numberOfRowsPilots; row++) {
@@ -140,12 +136,16 @@ function loadTablePilotList() {
 
 //------------------🧠 Initialisierungs-Sicherung ------------------//
 setTimeout(() => {
+  loadAllPilotTables();
+  updateAllPilots(numberOfPilots, numberOfRowsPilots);
+  attachSaveTriggers();
   updateArrayPilotNames(numberOfPilots);
   updateArrayPilotRank(numberOfPilots);
   updateArrayNotifyEmail(numberOfPilots);
   updatePilotHeadlines();
   updateDetailArrayFromIds(numberOfFixItems, numberOfPilots);
   updateArrayFixTask(numberOfFixTask, numberOfPilots);
+  
 }, 100);
 
 
@@ -155,6 +155,7 @@ window.updatePilotDropdownFromTable = updatePilotDropdownFromTable;
 window.openTab = openTab;
 window.updatePilotHeadlines = updatePilotHeadlines;
 window.pilotNames = pilotNames;
+window.numberOfPilots = numberOfPilots;
 
 
 //------------------🗃 Kommentare & Historie (aufbewahren) ------------------//

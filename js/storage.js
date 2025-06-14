@@ -4,6 +4,8 @@ console.log("storage.js geladen");
 
 // storage.js
 
+//------------------Pilots Tables Container (Save & Load)-------------------
+
 export function saveAllPilotTables() {
   const container = document.getElementById("pilotTablesContainer");
   const tables = container.querySelectorAll("table");
@@ -77,6 +79,78 @@ export function loadAllPilotTables(updateAllPilotsFn) {
   }
 
   console.log("✅ Piloten-Tabellen erfolgreich wiederhergestellt.");
+}
+
+
+
+//------------------------Pilot Details Container (Save & Load)----------------
+
+export function saveAllPilotDetailsTables() {
+  const container = document.getElementById("pilotDetailsContainer");
+  const tables = container.querySelectorAll("table");
+  const allData = {};
+
+  tables.forEach((table) => {
+    const tableId = table.id;
+    const tableData = [];
+
+    const rows = table.querySelectorAll("tr");
+    rows.forEach((row) => {
+      const rowData = [];
+      const cells = row.querySelectorAll("td, th");
+      cells.forEach((cell) => {
+        const input = cell.querySelector("input");
+        if (input) {
+          if (input.type === "checkbox") {
+            rowData.push(input.checked);
+          } else {
+            rowData.push(input.value);
+          }
+        } else {
+          rowData.push(cell.textContent.trim());
+        }
+      });
+      tableData.push(rowData);
+    });
+
+    allData[tableId] = tableData;
+  });
+
+  localStorage.setItem("pilotDetailsData", JSON.stringify(allData));
+  console.log("✅ Detail Tabellen mit Input-Feldern gespeichert.");
+}
+
+export function loadAllPilotDetailsTables() {
+  const savedData = localStorage.getItem("pilotDetailsData");
+  if (!savedData) return;
+
+  const allData = JSON.parse(savedData);
+
+  for (const tableId in allData) {
+    const table = document.getElementById(tableId);
+    if (!table) continue;
+
+    const rows = table.querySelectorAll("tr");
+    allData[tableId].forEach((rowData, rowIndex) => {
+      const cells = rows[rowIndex]?.querySelectorAll("td, th");
+      if (!cells) return;
+
+      rowData.forEach((value, cellIndex) => {
+        const cell = cells[cellIndex];
+        const input = cell.querySelector("input");
+
+        if (input) {
+          if (input.type === "checkbox") {
+            input.checked = value === true;
+          } else {
+            input.value = value;
+          }
+        } else {
+          cell.textContent = value;
+        }
+      });
+    });
+  }
 }
 
 

@@ -17,7 +17,7 @@ import {
   createPilotCompanyTable
 } from './pilotTables.js';
 
-import { loadAllPilotTables, saveAllPilotTables } from './storage.js';
+import { loadAllPilotDetailsTables, loadAllPilotTables, saveAllPilotTables } from './storage.js';
 import { openTab, updatePilotDropdownFromTable } from './ui.js';
 import {
   calculateRow,
@@ -137,6 +137,7 @@ function loadTablePilotList() {
 //------------------🧠 Initialisierungs-Sicherung ------------------//
 setTimeout(() => {
   loadAllPilotTables();
+  loadAllPilotDetailsTables();
   updateAllPilots(numberOfPilots, numberOfRowsPilots);
   attachSaveTriggers();
   updateArrayPilotNames(numberOfPilots);

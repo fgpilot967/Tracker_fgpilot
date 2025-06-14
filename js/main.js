@@ -32,7 +32,8 @@ import {
   fixedDetailItems, updateDetailArrayFromIds,
   insertFixedDetailItems, updatePilotHeadlines,
   fixedTaskItems, updateArrayFixTask,
-  insertFixedTaskItems, updatePilotParagraph, updatePilotParagraphRank
+  insertFixedTaskItems, updatePilotParagraph, updatePilotParagraphRank,
+  updateArrayPilotComments, pilotComments
 } from './arrays.js';
 
 
@@ -146,6 +147,7 @@ setTimeout(() => {
   updatePilotHeadlines();
   updateDetailArrayFromIds(numberOfFixItems, numberOfPilots);
   updateArrayFixTask(numberOfFixTask, numberOfPilots);
+  updateArrayPilotComments(numberOfPilots);
   
 }, 100);
 

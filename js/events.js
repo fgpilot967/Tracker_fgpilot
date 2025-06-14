@@ -16,6 +16,8 @@ export function attachSaveTriggers() {
   const inputs = container.querySelectorAll('input, td[contenteditable]');
   const detailsInputs = detailsContainer.querySelectorAll('input, td[contenteditable]');
 
+  //----------------------Pilot Tracker Tables-----------
+
   inputs.forEach(el => {
     if (el.tagName === 'INPUT') {
       el.addEventListener('change', saveAllPilotTables);
@@ -25,6 +27,8 @@ export function attachSaveTriggers() {
       el.addEventListener('blur', saveAllPilotTables);
     }
   });
+
+  //-----------------------Pilot Details Tables---------------
 
   detailsInputs.forEach(el => {
     if (el.tagName === 'INPUT') {

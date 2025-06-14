@@ -157,7 +157,7 @@ export function updateArrayNotifyEmail(numberOfPilots) {
 }
 
 
-//-------------------Fix Detail Items (Fix-Items for Pilot Details)---------------------------
+//-------------------Fix Detail Items (Array & DOM & Insert to Pilot)---------------------------
 
 export let fixedDetailItems = [];
 
@@ -208,7 +208,7 @@ export function insertFixedDetailItems(p) {
 }
 
 
-//-------------------Fix Initial Task Items (for Pilot Details)---------------------------
+//-------------------Fix Initial Task Items (Array & DOM & Insert to Pilot)---------------------------
 
 export let fixedTaskItems = [];
 
@@ -257,4 +257,42 @@ export function insertFixedTaskItems(p) {
     }
   }
 }
+
+
+
+//-------------------Pilot Comments (Array & DOM)---------------------------
+
+export let pilotComments = [];
+
+export function updateArrayPilotComments(numberOfPilots) {
+  pilotComments = [];
+  const saved = localStorage.getItem("pilotComments");
+    if (saved) {
+      try {
+        pilotComments = JSON.parse(saved);
+      } catch (e) {
+        console.warn("Fehler beim Parsen von pilotComments aus localStorage", e);
+        pilotComments = [];
+      }
+    }
+  
+  for (let i = 0; i < numberOfPilots; i++) {
+    const cell = document.getElementById(`commentPilot${i + 1}`);
+    const value = saved ? pilotComments[i] : cell.value.trim();
+    pilotComments[i] = value;
+    cell.value = value;
+
+    // Event nur einmal hinzufügen
+    if (!cell.dataset.listenerAdded) {
+      cell.addEventListener("input", () => {
+        pilotComments[i] = cell.value.trim();
+        localStorage.setItem("pilotComments", JSON.stringify(pilotComments));
+        console.log("pilotComments Array aktualisiert:", pilotComments);
+      });
+      cell.dataset.listenerAdded = "true";
+    }
+  }  
+  
+}
+
 

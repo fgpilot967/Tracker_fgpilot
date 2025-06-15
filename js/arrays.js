@@ -154,7 +154,6 @@ export function updateArrayNotifyEmail(numberOfPilots) {
       cell.dataset.listenerAdded = "true";
     }
   }
-  console.log(notifyEmailPilots[0]);
 }
 
 

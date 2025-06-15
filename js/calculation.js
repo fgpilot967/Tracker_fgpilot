@@ -3,7 +3,7 @@ console.log("calculation.js geladen");
 // calculation.js
 
 import { sendEmail } from './email.js';
-import { notifyEmailPilots } from './arrays.js';
+import { notifyEmailPilots, pilotNames } from './arrays.js';
 
 function formatDate(date) {
   const day = ("0" + date.getDate()).slice(-2);
@@ -52,8 +52,9 @@ export function calculateRow(pilotNumber, rowNumber) {
 
   
     // innerhalb von calculateRow():
-  const licenseCell = document.querySelector(`#editableTablePilot${pilotNumber} tr:nth-child(${rowNumber + 2}) td:nth-child(1)`);
+  const licenseCell = document.querySelector(`#editableTablePilot${pilotNumber} tr:nth-child(${rowNumber + 1}) td:nth-child(1)`);
   const licenseName = licenseCell ? licenseCell.textContent.trim() : "your license";
+
 
   // IDs der Checkboxen
   const cb30 = `emailSent30LiLane${rowNumber}Pilot${pilotNumber}`;
@@ -61,14 +62,14 @@ export function calculateRow(pilotNumber, rowNumber) {
   const cb90 = `emailSent90LiLane${rowNumber}Pilot${pilotNumber}`;
 
   // 📬 Automatisch senden
-  if (diffDays <= 90 && !document.getElementById(cb90)?.checked) {
-    sendEmail(90, licenseName, pilotNumber, cb90, notifyEmailPilots);
+  if (diffDays <= 30 && !document.getElementById(cb30)?.checked) {
+    sendEmail(diffDays, licenseName, pilotNames[(pilotNumber-1)], cb30, notifyEmailPilots[(pilotNumber-1)]);
   }
   if (diffDays <= 60 && !document.getElementById(cb60)?.checked) {
-    sendEmail(60, licenseName, pilotNumber, cb60);
+    sendEmail(diffDays, licenseName, pilotNames[(pilotNumber-1)], cb60, notifyEmailPilots[(pilotNumber-1)]);
   }
-  if (diffDays <= 30 && !document.getElementById(cb30)?.checked) {
-    sendEmail(30, licenseName, pilotNumber, cb30);
+  if (diffDays <= 90 && !document.getElementById(cb90)?.checked) {
+    sendEmail(diffDays, licenseName, pilotNames[(pilotNumber-1)], cb90, notifyEmailPilots[(pilotNumber-1)]);
   }
 }
 

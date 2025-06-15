@@ -149,11 +149,12 @@ export function updateArrayNotifyEmail(numberOfPilots) {
       cell.addEventListener("input", () => {
         notifyEmailPilots[i] = cell.textContent.trim();
         localStorage.setItem("notifyEmailPilots", JSON.stringify(notifyEmailPilots));
-        console.log("notifyEmailPilots Array aktualisiert:", notifyEmailPilots);
+        console.log("notifyEmailPilots Array aktualisiert:", notifyEmailPilots); 
       });
       cell.dataset.listenerAdded = "true";
     }
   }
+  console.log(notifyEmailPilots[0]);
 }
 
 

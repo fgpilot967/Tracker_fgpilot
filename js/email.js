@@ -1,8 +1,11 @@
 
 // email.js
 
-export function sendEmail(remDays, licenseName, pilotNumber, checkboxId) {
-  const recipient = `pilot${pilotNumber}@abc.com`;
+
+
+
+export function sendEmail(remDays, licenseName, pilotNumber, checkboxId, notifyEmailPilots) {
+  const recipient = `${notifyEmailPilots[0]}`;
   const ccRecipient = 'xxx@abc.com, xyz@abc.com';
 
   const subject = `Automated Email - ${licenseName}`;

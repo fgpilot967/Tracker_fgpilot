@@ -3,6 +3,7 @@ console.log("calculation.js geladen");
 // calculation.js
 
 import { sendEmail } from './email.js';
+import { notifyEmailPilots } from './arrays.js';
 
 function formatDate(date) {
   const day = ("0" + date.getDate()).slice(-2);
@@ -20,7 +21,16 @@ export function calculateRow(pilotNumber, rowNumber) {
   const expiryCell = document.getElementById(`newExpiryDateLiLane${rowNumber}Pilot${pilotNumber}`);
   const remDaysCell = document.getElementById(`remDaysLiLane${rowNumber}Pilot${pilotNumber}`);
 
-  if (!dateInput || !validityCell || !expiryCell || !remDaysCell) return;
+  //------ Prüfung ob die Zellen zur Berechnung beschrieben sind. Falls nicht wird die Berechnung gelöscht--------
+  const inputDate = dateInput.value.trim();
+  const cellValidity = validityCell.textContent.trim();
+    if (!inputDate || !cellValidity) {
+      expiryCell.textContent = "";
+      remDaysCell.textContent = "";
+      return;
+    }
+
+  if (!dateInput || !validityCell || !expiryCell || !remDaysCell) return; //---Falls kein Eintrag, dann keine Berechnung-----
 
   const lastCheck = new Date(dateInput.value);
   const validity = parseInt(validityCell.textContent.replace(/\D/g, ""));
@@ -52,7 +62,7 @@ export function calculateRow(pilotNumber, rowNumber) {
 
   // 📬 Automatisch senden
   if (diffDays <= 90 && !document.getElementById(cb90)?.checked) {
-    sendEmail(90, licenseName, pilotNumber, cb90);
+    sendEmail(90, licenseName, pilotNumber, cb90, notifyEmailPilots);
   }
   if (diffDays <= 60 && !document.getElementById(cb60)?.checked) {
     sendEmail(60, licenseName, pilotNumber, cb60);

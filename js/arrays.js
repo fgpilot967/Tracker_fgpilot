@@ -208,6 +208,41 @@ export function insertFixedDetailItems(p) {
 }
 
 
+//-------------------Admin Table (Array & DOM)---------------------------
+
+export let adminTableArray = [];
+
+export function updateAdminTable() {
+  adminTableArray = [];
+    const saved = localStorage.getItem("adminTableArray");
+    if (saved) {
+      try {
+        adminTableArray = JSON.parse(saved);
+      } catch (e) {
+        console.warn("Fehler beim Parsen von adminTableArray aus localStorage", e);
+        adminTableArray = [];
+      }
+    }
+  
+    for (let i = 0; i < 3; i++) {
+    const cell = document.getElementById(`adminTable${i}`);
+    const value = saved ? adminTableArray[i] : cell.textContent.trim();
+    adminTableArray[i] = value;
+    cell.textContent = value;
+
+      // Event nur einmal hinzufügen
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("input", () => {
+          adminTableArray[i] = cell.textContent.trim();
+          localStorage.setItem("adminTableArray", JSON.stringify(adminTableArray));
+          console.log("Admin Table Array aktualisiert:", adminTableArray);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+}
+
+
 //-------------------Fix Initial Task Items (Array & DOM & Insert to Pilot)---------------------------
 
 export let fixedTaskItems = [];

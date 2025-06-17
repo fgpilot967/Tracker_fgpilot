@@ -3,7 +3,7 @@ console.log("calculation.js geladen");
 // calculation.js
 
 import { sendEmail } from './email.js';
-import { notifyEmailPilots, pilotNames } from './arrays.js';
+import { adminTableArray, notifyEmailPilots, pilotNames, updateAdminTable } from './arrays.js';
 
 function formatDate(date) {
   const day = ("0" + date.getDate()).slice(-2);
@@ -69,7 +69,7 @@ export function calculateRow(pilotNumber, rowNumber) {
     sendEmail(diffDays, licenseName, pilotNames[(pilotNumber-1)], cb60, notifyEmailPilots[(pilotNumber-1)]);
   }
   if (diffDays <= 90 && !document.getElementById(cb90)?.checked) {
-    sendEmail(diffDays, licenseName, pilotNames[(pilotNumber-1)], cb90, notifyEmailPilots[(pilotNumber-1)]);
+    sendEmail(diffDays, licenseName, pilotNames[(pilotNumber-1)], cb90, notifyEmailPilots[(pilotNumber-1)], adminTableArray);
   }
 }
 

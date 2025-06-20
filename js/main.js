@@ -17,7 +17,7 @@ import {
   createPilotCompanyTable
 } from './pilotTables.js';
 
-import { loadAllPilotDetailsTables, loadAllPilotTables, saveAllPilotTables } from './storage.js';
+import { loadAllPilotDetailsTablesWithData, loadAllPilotTablesWithData, loadTrackerData, saveAllPilotTables, saveTrackerData } from './storage.js';
 import { openTab, updatePilotDropdownFromTable } from './ui.js';
 import {
   calculateRow,
@@ -36,6 +36,7 @@ import {
   updateArrayPilotComments, pilotComments, 
   adminTableArray, updateAdminTable
 } from './arrays.js';
+
 
 
 //------------------🧱 DOM Aufbau ------------------//
@@ -106,10 +107,11 @@ function saveTablePilotList() {
     tableData.push(rowData);
   }
 
-  localStorage.setItem("TablePilotList", JSON.stringify(tableData));
-  console.log("Pilot-List gespeichert");
+//  localStorage.setItem("TablePilotList", JSON.stringify(tableData));
+//  console.log("Pilot-List gespeichert");
 }
 
+/*
 function loadTablePilotList() {
   const table = document.getElementById("editableTablePilotList");
   const storedData = JSON.parse(localStorage.getItem("TablePilotList"));
@@ -134,12 +136,14 @@ function loadTablePilotList() {
   updateArrayPilotNames();
   updatePilotHeadlines();
 }
-
+*/
 
 //------------------🧠 Initialisierungs-Sicherung ------------------//
 setTimeout(() => {
-  loadAllPilotTables();
-  loadAllPilotDetailsTables();
+  saveTrackerData();
+  loadTrackerData();
+  loadAllPilotTablesWithData();
+  loadAllPilotDetailsTablesWithData();
   updateAllPilots(numberOfPilots, numberOfRowsPilots);
   attachSaveTriggers();
   updateArrayPilotNames(numberOfPilots);
@@ -151,7 +155,8 @@ setTimeout(() => {
   updateArrayPilotComments(numberOfPilots);
   updateAdminTable();
   
-}, 100);
+  
+}, 500);
 
 
 //------------------🌍 Exports ans Window für Debugging ------------------//
@@ -160,7 +165,12 @@ window.updatePilotDropdownFromTable = updatePilotDropdownFromTable;
 window.openTab = openTab;
 window.updatePilotHeadlines = updatePilotHeadlines;
 window.pilotNames = pilotNames;
+window.pilotRank = pilotRank;
+window.notifyEmailPilots = notifyEmailPilots;
 window.numberOfPilots = numberOfPilots;
+window.numberOfRowsPilots = numberOfRowsPilots;
+window.saveTrackerData = saveTrackerData;
+// window.allDataPilotTablesContainer = allDataPilotTablesContainer;
 
 
 //------------------🗃 Kommentare & Historie (aufbewahren) ------------------//
@@ -177,3 +187,56 @@ function saveTableFixTasks() { ... }
 // Funktion zum Laden der Pilot-Fix-Task-Tabelle
 function loadTableFixTasks() { ... }
 */
+
+/*
+export function saveTrackerData() {
+  fetch("http://217.154.84.3:3000/save", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user: "frankie",
+      data: { 
+        pilotNames,
+        pilotRank,
+        notifyEmailPilots 
+      }
+    })
+  })
+  .then(res => res.text())
+  .then(data => console.log("✅ Auf dem Server gespeichert:", data))
+  .catch(error => console.error("❌ Fehler beim Speichern:", error));
+};
+*/
+
+/*
+window.savePilotNames = function() {
+  fetch("http://217.154.84.3:3000/save", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user: "frankie",
+      data: { pilotNames }
+    })
+  })
+  .then(res => res.text())
+  .then(data => console.log("✅ Auf dem Server gespeichert:", data))
+  .catch(error => console.error("❌ Fehler beim Speichern:", error));
+}
+*/
+
+/*
+function savePilotNames() {
+  fetch("http://217.154.84.3:3000/save", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user: "frankie",
+      data: { pilotNames }
+    })
+  })
+  .then(res => res.text())
+  .then(data => console.log("✅ Auf dem Server gespeichert:", data))
+  .catch(error => console.error("❌ Fehler beim Speichern:", error));
+};
+*/
+

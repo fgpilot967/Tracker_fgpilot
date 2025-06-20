@@ -23,7 +23,7 @@ export function attachSaveTriggers() {
       el.addEventListener('change', saveAllPilotTables);
     } else {
       // Für contenteditable: keyup, blur
-      el.addEventListener('input', saveAllPilotTables);
+      //el.addEventListener('input', saveAllPilotTables);
       el.addEventListener('blur', saveAllPilotTables);
     }
   });
@@ -35,7 +35,7 @@ export function attachSaveTriggers() {
       el.addEventListener('change', saveAllPilotDetailsTables);
     } else {
       // Für contenteditable: keyup, blur
-      el.addEventListener('input', saveAllPilotDetailsTables);
+      //el.addEventListener('input', saveAllPilotDetailsTables);
       el.addEventListener('blur', saveAllPilotDetailsTables);
     }
   });

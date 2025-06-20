@@ -10,7 +10,7 @@
 
 
 console.log("Arrays.js geladen");
-
+import { saveTrackerData } from './storage.js';
 
 //-----------------Update der Piloten-Tabellen Headline-Anzeige-----------------------------
 
@@ -32,40 +32,42 @@ export let pilotNames = [];
 
 export function updateArrayPilotNames(numberOfPilots) {
   pilotNames = [];
-  const saved = localStorage.getItem("pilotNames");
-    if (saved) {
-      try {
-        pilotNames = JSON.parse(saved);
-      } catch (e) {
-        console.warn("Fehler beim Parsen von pilotNames aus localStorage", e);
-        pilotNames = [];
-      }
-    }
+//  const saved = localStorage.getItem("pilotNames");
+//    if (saved) {
+//      try {
+//        pilotNames = JSON.parse(saved);
+//     } catch (e) {
+//       console.warn("Fehler beim Parsen von pilotNames aus localStorage", e);
+//        pilotNames = [];
+//      }
+//    }
   
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`pilotName${i}`);
-    const value = saved ? pilotNames[i] : cell.textContent.trim();
-    pilotNames[i] = value;
-    cell.textContent = value;
+//    const value = saved ? pilotNames[i] : cell.textContent.trim();
+//    pilotNames[i] = value;
+//    cell.textContent = value;
 
     // Event nur einmal hinzufügen
     if (!cell.dataset.listenerAdded) {
-      cell.addEventListener("input", () => {
+      cell.addEventListener("blur", () => {
         pilotNames[i] = cell.textContent.trim();
-        localStorage.setItem("pilotNames", JSON.stringify(pilotNames));
+//        localStorage.setItem("pilotNames", JSON.stringify(pilotNames));
+        saveTrackerData();
         for (let p = 1; p <= numberOfPilots; p++) {
           updatePilotParagraph(p);
         }
         console.log("pilotNames Array aktualisiert:", pilotNames);
         updatePilotHeadlines();
       });
-      cell.dataset.listenerAdded = "true";
+      cell.dataset.listenerAdded = "true"; 
     }
   }  
   updatePilotParagraph();
 }
 
-export function updatePilotParagraph() {
+//export 
+  function updatePilotParagraph() {
   console.log("Paragraph aktualisiert");
   for (let i = 0; i < pilotNames.length; i++) {
     const p = document.getElementById(`pilot${i + 1}Name`);
@@ -76,19 +78,21 @@ export function updatePilotParagraph() {
 
 //-------------------Pilot Rank (Array & DOM)---------------------------
 
-export let pilotRank = [];
+//export 
+let pilotRank = [];
 
-export function updateArrayPilotRank(numberOfPilots) {
+//export 
+function updateArrayPilotRank(numberOfPilots) {
   pilotRank = [];
-  const saved = localStorage.getItem("pilotRank");
-    if (saved) {
-      try {
-        pilotRank = JSON.parse(saved);
-      } catch (e) {
-        console.warn("Fehler beim Parsen von pilotRank aus localStorage", e);
-        pilotRank = [];
-      }
-    }
+//  const saved = localStorage.getItem("pilotRank");
+//    if (saved) {
+//      try {
+//        pilotRank = JSON.parse(saved);
+//      } catch (e) {
+//        console.warn("Fehler beim Parsen von pilotRank aus localStorage", e);
+//        pilotRank = [];
+//      }
+//    }
   
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`rankPilot${i}`);
@@ -98,9 +102,10 @@ export function updateArrayPilotRank(numberOfPilots) {
 
     // Event nur einmal hinzufügen
     if (!cell.dataset.listenerAdded) {
-      cell.addEventListener("input", () => {
+      cell.addEventListener("blur", () => {
         pilotRank[i] = cell.textContent.trim();
-        localStorage.setItem("pilotRank", JSON.stringify(pilotRank));
+//        localStorage.setItem("pilotRank", JSON.stringify(pilotRank));
+        saveTrackerData();
         for (let p = 1; p <= numberOfPilots; p++) {
           updatePilotParagraphRank(p);
         }
@@ -113,7 +118,8 @@ export function updateArrayPilotRank(numberOfPilots) {
   updatePilotParagraphRank();
 }
 
-export function updatePilotParagraphRank() {
+//export 
+function updatePilotParagraphRank() {
   console.log("Rank aktualisiert");
   for (let i = 0; i < pilotRank.length; i++) {
     const pRank = document.getElementById(`pilot${i + 1}Rank`);
@@ -124,19 +130,21 @@ export function updatePilotParagraphRank() {
 
 //-------------------Notify-Emails der Piloten (Array & DOM)------------------
 
-export let notifyEmailPilots = [];
+//export 
+let notifyEmailPilots = [];
 
-export function updateArrayNotifyEmail(numberOfPilots) {
+//export 
+function updateArrayNotifyEmail(numberOfPilots) {
   notifyEmailPilots = [];
-    const saved = localStorage.getItem("notifyEmailPilots");
-    if (saved) {
-      try {
-        notifyEmailPilots = JSON.parse(saved);
-      } catch (e) {
-        console.warn("Fehler beim Parsen von notifyEmailPilots aus localStorage", e);
-        notifyEmailPilots = [];
-      }
-    }
+//    const saved = localStorage.getItem("notifyEmailPilots");
+//    if (saved) {
+//      try {
+//        notifyEmailPilots = JSON.parse(saved);
+//      } catch (e) {
+//        console.warn("Fehler beim Parsen von notifyEmailPilots aus localStorage", e);
+//        notifyEmailPilots = [];
+//      }
+//    }
   
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`notifyEmailPilot${i}`);
@@ -146,9 +154,10 @@ export function updateArrayNotifyEmail(numberOfPilots) {
 
     // Event nur einmal hinzufügen
     if (!cell.dataset.listenerAdded) {
-      cell.addEventListener("input", () => {
+      cell.addEventListener("blur", () => {
         notifyEmailPilots[i] = cell.textContent.trim();
-        localStorage.setItem("notifyEmailPilots", JSON.stringify(notifyEmailPilots));
+//        localStorage.setItem("notifyEmailPilots", JSON.stringify(notifyEmailPilots));
+        saveTrackerData();
         console.log("notifyEmailPilots Array aktualisiert:", notifyEmailPilots); 
       });
       cell.dataset.listenerAdded = "true";
@@ -159,19 +168,21 @@ export function updateArrayNotifyEmail(numberOfPilots) {
 
 //-------------------Fix Detail Items (Array & DOM & Insert to Pilot)---------------------------
 
-export let fixedDetailItems = [];
+//export 
+let fixedDetailItems = [];
 
-export function updateDetailArrayFromIds(numberOfFixItems, numberOfPilots) {
+//export 
+function updateDetailArrayFromIds(numberOfFixItems, numberOfPilots) {
   fixedDetailItems = [];
-    const saved = localStorage.getItem("fixedDetailItems");
-    if (saved) {
-      try {
-        fixedDetailItems = JSON.parse(saved);
-      } catch (e) {
-        console.warn("Fehler beim Parsen von fixedDetailItems aus localStorage", e);
-        fixedDetailItems = [];
-      }
-    }
+//    const saved = localStorage.getItem("fixedDetailItems");
+//    if (saved) {
+//      try {
+//        fixedDetailItems = JSON.parse(saved);
+//      } catch (e) {
+//        console.warn("Fehler beim Parsen von fixedDetailItems aus localStorage", e);
+//        fixedDetailItems = [];
+//      }
+//    }
 
   for (let i = 0; i < numberOfFixItems; i++) {
     const cell = document.getElementById(`fixedDetailedItem${i}`);
@@ -181,9 +192,10 @@ export function updateDetailArrayFromIds(numberOfFixItems, numberOfPilots) {
 
     // Event nur einmal hinzufügen
     if (!cell.dataset.listenerAdded) {
-      cell.addEventListener("input", () => {
+      cell.addEventListener("blur", () => {
         fixedDetailItems[i] = cell.textContent.trim();
-        localStorage.setItem("fixedDetailItems", JSON.stringify(fixedDetailItems));  // 🆕
+//        localStorage.setItem("fixedDetailItems", JSON.stringify(fixedDetailItems));  // 🆕
+        saveTrackerData();
         for (let p = 1; p <= numberOfPilots; p++) {
         insertFixedDetailItems(p);
         }
@@ -197,7 +209,8 @@ export function updateDetailArrayFromIds(numberOfFixItems, numberOfPilots) {
   }
 }
 
-export function insertFixedDetailItems(p) {
+//export 
+function insertFixedDetailItems(p) {
   for (let i = 0; i < fixedDetailItems.length; i++) {
     const cellId = `itemDetailLane${i + 1}Pilot${p}`;
     const cell = document.getElementById(cellId);
@@ -210,19 +223,21 @@ export function insertFixedDetailItems(p) {
 
 //-------------------Admin Table (Array & DOM)---------------------------
 
-export let adminTableArray = [];
+//export 
+let adminTableArray = [];
 
-export function updateAdminTable() {
+//export 
+function updateAdminTable() {
   adminTableArray = [];
-    const saved = localStorage.getItem("adminTableArray");
-    if (saved) {
-      try {
-        adminTableArray = JSON.parse(saved);
-      } catch (e) {
-        console.warn("Fehler beim Parsen von adminTableArray aus localStorage", e);
-        adminTableArray = [];
-      }
-    }
+//    const saved = localStorage.getItem("adminTableArray");
+//    if (saved) {
+//      try {
+//        adminTableArray = JSON.parse(saved);
+//      } catch (e) {
+//        console.warn("Fehler beim Parsen von adminTableArray aus localStorage", e);
+//        adminTableArray = [];
+//      }
+//    }
   
     for (let i = 0; i < 3; i++) {
     const cell = document.getElementById(`adminTable${i}`);
@@ -232,9 +247,10 @@ export function updateAdminTable() {
 
       // Event nur einmal hinzufügen
       if (!cell.dataset.listenerAdded) {
-        cell.addEventListener("input", () => {
+        cell.addEventListener("blur", () => {
           adminTableArray[i] = cell.textContent.trim();
-          localStorage.setItem("adminTableArray", JSON.stringify(adminTableArray));
+//          localStorage.setItem("adminTableArray", JSON.stringify(adminTableArray));
+          saveTrackerData();
           console.log("Admin Table Array aktualisiert:", adminTableArray);
         });
         cell.dataset.listenerAdded = "true";
@@ -245,19 +261,21 @@ export function updateAdminTable() {
 
 //-------------------Fix Initial Task Items (Array & DOM & Insert to Pilot)---------------------------
 
-export let fixedTaskItems = [];
+//export 
+let fixedTaskItems = [];
 
-export function updateArrayFixTask(numberOfFixTask, numberOfPilots) {
+//export 
+function updateArrayFixTask(numberOfFixTask, numberOfPilots) {
   fixedTaskItems = [];
-    const saved = localStorage.getItem("fixedTaskItems");
-    if (saved) {
-      try {
-        fixedTaskItems = JSON.parse(saved);
-      } catch (e) {
-        console.warn("Fehler beim Parsen von fixedTaskItems aus localStorage", e);
-        fixedTaskItems = [];
-      }
-    }
+//    const saved = localStorage.getItem("fixedTaskItems");
+//    if (saved) {
+//      try {
+//        fixedTaskItems = JSON.parse(saved);
+//      } catch (e) {
+//        console.warn("Fehler beim Parsen von fixedTaskItems aus localStorage", e);
+//        fixedTaskItems = [];
+//      }
+//    }
   
   for (let i = 0; i < numberOfFixTask; i++) {
     const cell = document.getElementById(`fixedInitialTaskItem${i}`);
@@ -267,9 +285,10 @@ export function updateArrayFixTask(numberOfFixTask, numberOfPilots) {
 
     // Event nur einmal hinzufügen
     if (!cell.dataset.listenerAdded) {
-      cell.addEventListener("input", () => {
+      cell.addEventListener("blur", () => {
         fixedTaskItems[i] = cell.textContent.trim();
-        localStorage.setItem("fixedTaskItems", JSON.stringify(fixedTaskItems));
+//        localStorage.setItem("fixedTaskItems", JSON.stringify(fixedTaskItems));
+        saveTrackerData();
         for (let p = 1; p <= numberOfPilots; p++) {
         insertFixedTaskItems(p);
         }
@@ -283,7 +302,8 @@ export function updateArrayFixTask(numberOfFixTask, numberOfPilots) {
   }
 }
 
-export function insertFixedTaskItems(p) {
+//export 
+function insertFixedTaskItems(p) {
   for (let i = 0; i < fixedTaskItems.length; i++) {
     const cellId = `itemCompanyLane${i + 1}Pilot${p}`;
     const cell = document.getElementById(cellId);
@@ -297,19 +317,21 @@ export function insertFixedTaskItems(p) {
 
 //-------------------Pilot Comments (Array & DOM)---------------------------
 
-export let pilotComments = [];
+//export 
+let pilotComments = [];
 
-export function updateArrayPilotComments(numberOfPilots) {
+//export 
+function updateArrayPilotComments(numberOfPilots) {
   pilotComments = [];
-  const saved = localStorage.getItem("pilotComments");
-    if (saved) {
-      try {
-        pilotComments = JSON.parse(saved);
-      } catch (e) {
-        console.warn("Fehler beim Parsen von pilotComments aus localStorage", e);
-        pilotComments = [];
-      }
-    }
+//  const saved = localStorage.getItem("pilotComments");
+//    if (saved) {
+//      try {
+//        pilotComments = JSON.parse(saved);
+//      } catch (e) {
+//        console.warn("Fehler beim Parsen von pilotComments aus localStorage", e);
+//        pilotComments = [];
+//      }
+//    }
   
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`commentPilot${i + 1}`);
@@ -319,9 +341,10 @@ export function updateArrayPilotComments(numberOfPilots) {
 
     // Event nur einmal hinzufügen
     if (!cell.dataset.listenerAdded) {
-      cell.addEventListener("input", () => {
+      cell.addEventListener("blur", () => {
         pilotComments[i] = cell.value.trim();
-        localStorage.setItem("pilotComments", JSON.stringify(pilotComments));
+//        localStorage.setItem("pilotComments", JSON.stringify(pilotComments));
+        saveTrackerData();
         console.log("pilotComments Array aktualisiert:", pilotComments);
       });
       cell.dataset.listenerAdded = "true";

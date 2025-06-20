@@ -107,8 +107,8 @@ function saveTablePilotList() {
     tableData.push(rowData);
   }
 
-//  localStorage.setItem("TablePilotList", JSON.stringify(tableData));
-//  console.log("Pilot-List gespeichert");
+  localStorage.setItem("TablePilotList", JSON.stringify(tableData));
+  console.log("Pilot-List gespeichert");
 }
 
 /*

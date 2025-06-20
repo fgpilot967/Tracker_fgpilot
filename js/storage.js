@@ -42,7 +42,7 @@ export function saveAllPilotTables() {
 
   });
   saveTrackerData();
-//  localStorage.setItem("pilotTablesData", JSON.stringify(allDataPilotTablesContainer));
+  localStorage.setItem("pilotTablesData", JSON.stringify(allDataPilotTablesContainer));
   console.log("✅ Tabellen mit Input-Feldern gespeichert.");
 }
 
@@ -110,7 +110,7 @@ export function loadAllPilotDetailsTablesWithData(data) {
 
 
 
-/*
+
 export function loadAllPilotTables(updateAllPilotsFn) {
   const savedData = localStorage.getItem("pilotTablesData");
   if (!savedData) return;
@@ -151,7 +151,7 @@ export function loadAllPilotTables(updateAllPilotsFn) {
 
   console.log("✅ Piloten-Tabellen erfolgreich wiederhergestellt.");
 }
-*/
+
 
 
 //------------------------Pilot Details Container (Save & Load)----------------
@@ -189,12 +189,12 @@ export function saveAllPilotDetailsTables() {
     allDataPilotDetailsContainer[tableId] = tableData;
   });
   saveTrackerData();
-//  localStorage.setItem("pilotDetailsData", JSON.stringify(allDataPilotDetailsContainer));
+  localStorage.setItem("pilotDetailsData", JSON.stringify(allDataPilotDetailsContainer));
   console.log("✅ Detail Tabellen mit Input-Feldern gespeichert.");
 }
 
 
-/*
+
 export function loadAllPilotDetailsTables() {
   const savedData = localStorage.getItem("pilotDetailsData");
   if (!savedData) return;
@@ -227,7 +227,7 @@ export function loadAllPilotDetailsTables() {
     });
   }
 }
-*/
+
 
 import { pilotNames, pilotRank, notifyEmailPilots, fixedDetailItems, fixedTaskItems, adminTableArray, pilotComments } from './arrays.js';
 

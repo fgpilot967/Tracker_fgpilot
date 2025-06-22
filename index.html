@@ -42,16 +42,14 @@
 
 
 <!-- Tracker Tables -->  
-
 <div id="tables" class="tabcontent">
-  
+   
   <div id="pilotTablesContainer"></div>
 </div>
 
 
 
 <!-- Pilot Details --> 
-
   <div id="pilot1" class="tabcontent">
     <h2>Details for:</h2>
       <div style="display: flex; align-items: baseline; gap: 30px;">
@@ -193,177 +191,174 @@
   </div>
 
   <!-------------hier liegen die Detail und Company Tabellen. Erstellt von js---------->
-<div id="pilotDetailsContainer"></div> <!--hier liegen beide: Detail & Task-->
-<div id="pilotCompanyContainer"></div> <!--dieser container ist gerade leer-->
+  <div id="pilotDetailsContainer"></div> <!--hier liegen beide: Detail & Task-->
+  <div id="pilotCompanyContainer"></div> <!--dieser container ist gerade leer-->
 
-<!-- Setup --> 
+  <!-- Setup --> 
+
+  <div id="setup" class="tabcontent">
+      <h1>General Setup</h1>
+
+      
+
+    <table id="adminTable">
+      <tr>
+        <th colspan="2" class="headTable">Admin</th>
+      </tr> 
+      <tr>
+        <td>Name</td>
+        <td contenteditable="true" id="adminTable0" class="green"></td>
+      </tr>
+      <tr>
+        <td>Mobil-No.:</td>
+        <td contenteditable="true" id="adminTable1" class="green"></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td contenteditable="true" id="adminTable2" class="green"></td>
+      </tr>
+    </table>
 
 
-
-
-<div id="setup" class="tabcontent">
-    <h1>General Setup</h1>
-
+    <div class="flexbox">   
+      <div>
+        <table id="editableTablePilotList">
+          <tr id="firstRowPilotList">
+            <th>Pilot #</th>
+            <th>Name</th>
+            <th>Rank</th>
+            <th>Notification Email</th>
+          </tr>
+          <tr>
+            <td>Pilot 1</td>
+            <td contenteditable="true" class="green" id="pilotName0"></td>
+            <td contenteditable="true" class="grey" id="rankPilot0"></td>
+            <td contenteditable="true" class="grey" id="notifyEmailPilot0"></td>
+          </tr>
+          <tr>
+            <td>Pilot 2</td>
+            <td contenteditable="true" class="green" id="pilotName1"></td>
+            <td contenteditable="true" class="grey" id="rankPilot1"></td>
+            <td contenteditable="true" class="grey" id="notifyEmailPilot1"></td>
+          </tr>
+          <tr>
+            <td>Pilot 3</td>
+            <td contenteditable="true" class="green" id="pilotName2"></td>
+            <td contenteditable="true" class="grey" id="rankPilot2"></td>
+            <td contenteditable="true" class="grey" id="notifyEmailPilot2"></td>
+          </tr>
+          <tr>
+            <td>Pilot 4</td>
+            <td contenteditable="true" class="green" id="pilotName3"></td>
+            <td contenteditable="true" class="grey" id="rankPilot3"></td>
+            <td contenteditable="true" class="grey" id="notifyEmailPilot3"></td>
+          </tr>
+          <tr>
+            <td>Pilot 5</td>
+            <td contenteditable="true" class="green" id="pilotName4"></td>
+            <td contenteditable="true" class="grey" id="rankPilot4"></td>
+            <td contenteditable="true" class="grey" id="notifyEmailPilot4"></td>
+          </tr>
+          <tr>
+            <td>Pilot 6</td>
+            <td contenteditable="true" class="green" id="pilotName5"></td>
+            <td contenteditable="true" class="grey" id="rankPilot5"></td>
+            <td contenteditable="true" class="grey" id="notifyEmailPilot5"></td>
+          </tr>
+          <tr>
+            <td>Pilot 7</td>
+            <td contenteditable="true" class="green" id="pilotName6"></td>
+            <td contenteditable="true" class="grey" id="rankPilot6"></td>
+            <td contenteditable="true" class="grey" id="notifyEmailPilot6"></td>
+          </tr>
+          <tr>
+            <td>Pilot 8</td>
+            <td contenteditable="true" class="green" id="pilotName7"></td>
+            <td contenteditable="true" class="grey" id="rankPilot7"></td>
+            <td contenteditable="true" class="grey" id="notifyEmailPilot7"></td>
+          </tr>
+          <tr>
+            <td>Pilot 9</td>
+            <td contenteditable="true" class="green" id="pilotName8"></td>
+            <td contenteditable="true" class="grey" id="rankPilot8"></td>
+            <td contenteditable="true" class="grey" id="notifyEmailPilot8"></td>
+          </tr>
+          <tr>
+            <td>Pilot 10</td>
+            <td contenteditable="true" class="green" id="pilotName9"></td>
+            <td contenteditable="true" class="grey" id="rankPilot9"></td>
+            <td contenteditable="true" class="grey" id="notifyEmailPilot9"></td>
+          </tr>
+        </table>
+      </div>
     
 
-  <table id="adminTable">
-    <tr>
-      <th colspan="2" class="headTable">Admin</th>
-    </tr> 
-    <tr>
-      <td>Name</td>
-      <td contenteditable="true" id="adminTable0" class="green"></td>
-    </tr>
-    <tr>
-      <td>Mobil-No.:</td>
-      <td contenteditable="true" id="adminTable1" class="green"></td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td contenteditable="true" id="adminTable2" class="green"></td>
-    </tr>
-  </table>
-
-
-  <div class="flexbox">   
-    <div>
-      <table id="editableTablePilotList">
-        <tr id="firstRowPilotList">
-          <th>Pilot #</th>
-          <th>Name</th>
-          <th>Rank</th>
-          <th>Notification Email</th>
-        </tr>
-        <tr>
-          <td>Pilot 1</td>
-          <td contenteditable="true" class="green" id="pilotName0"></td>
-          <td contenteditable="true" class="grey" id="rankPilot0"></td>
-          <td contenteditable="true" class="grey" id="notifyEmailPilot0"></td>
-        </tr>
-        <tr>
-          <td>Pilot 2</td>
-          <td contenteditable="true" class="green" id="pilotName1"></td>
-          <td contenteditable="true" class="grey" id="rankPilot1"></td>
-          <td contenteditable="true" class="grey" id="notifyEmailPilot1"></td>
-        </tr>
-        <tr>
-          <td>Pilot 3</td>
-          <td contenteditable="true" class="green" id="pilotName2"></td>
-          <td contenteditable="true" class="grey" id="rankPilot2"></td>
-          <td contenteditable="true" class="grey" id="notifyEmailPilot2"></td>
-        </tr>
-        <tr>
-          <td>Pilot 4</td>
-          <td contenteditable="true" class="green" id="pilotName3"></td>
-          <td contenteditable="true" class="grey" id="rankPilot3"></td>
-          <td contenteditable="true" class="grey" id="notifyEmailPilot3"></td>
-        </tr>
-        <tr>
-          <td>Pilot 5</td>
-          <td contenteditable="true" class="green" id="pilotName4"></td>
-          <td contenteditable="true" class="grey" id="rankPilot4"></td>
-          <td contenteditable="true" class="grey" id="notifyEmailPilot4"></td>
-        </tr>
-        <tr>
-          <td>Pilot 6</td>
-          <td contenteditable="true" class="green" id="pilotName5"></td>
-          <td contenteditable="true" class="grey" id="rankPilot5"></td>
-          <td contenteditable="true" class="grey" id="notifyEmailPilot5"></td>
-        </tr>
-        <tr>
-          <td>Pilot 7</td>
-          <td contenteditable="true" class="green" id="pilotName6"></td>
-          <td contenteditable="true" class="grey" id="rankPilot6"></td>
-          <td contenteditable="true" class="grey" id="notifyEmailPilot6"></td>
-        </tr>
-        <tr>
-          <td>Pilot 8</td>
-          <td contenteditable="true" class="green" id="pilotName7"></td>
-          <td contenteditable="true" class="grey" id="rankPilot7"></td>
-          <td contenteditable="true" class="grey" id="notifyEmailPilot7"></td>
-        </tr>
-        <tr>
-          <td>Pilot 9</td>
-          <td contenteditable="true" class="green" id="pilotName8"></td>
-          <td contenteditable="true" class="grey" id="rankPilot8"></td>
-          <td contenteditable="true" class="grey" id="notifyEmailPilot8"></td>
-        </tr>
-        <tr>
-          <td>Pilot 10</td>
-          <td contenteditable="true" class="green" id="pilotName9"></td>
-          <td contenteditable="true" class="grey" id="rankPilot9"></td>
-          <td contenteditable="true" class="grey" id="notifyEmailPilot9"></td>
-        </tr>
-      </table>
-    </div>
-  
-
-    <div>
-      <p>Fix-Detail-Items <br>(valid for every Pilot)</p>
-      <table id="fixTablePilotDetails">
-        <tr id="firstRowPilotDetails">
-          <th class="headTable">Fix-Info-Items</th>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedDetailedItem0"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedDetailedItem1"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedDetailedItem2"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedDetailedItem3"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedDetailedItem4"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedDetailedItem5"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedDetailedItem6"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedDetailedItem7"></td>
-        </tr>
-      </table>
-    </div>
-    <div>
-      <p>Fix-Initial-Task-Items <br>(valid for every Pilot)</p>
-      <table id="fixTablePilotInitialTask">
-        <tr id="firstRowPilotInitialTask">
-          <th class="headTable">Fix-Initial-Task-Items</th>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedInitialTaskItem0"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedInitialTaskItem1"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedInitialTaskItem2"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedInitialTaskItem3"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedInitialTaskItem4"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedInitialTaskItem5"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedInitialTaskItem6"></td>
-        </tr>
-        <tr>
-          <td contenteditable="true" class="orange" id="fixedInitialTaskItem7"></td>
-        </tr>
-      </table>
-    </div>
-  </div> 
-</div>
+      <div>
+        <p>Fix-Detail-Items <br>(valid for every Pilot)</p>
+        <table id="fixTablePilotDetails">
+          <tr id="firstRowPilotDetails">
+            <th class="headTable">Fix-Info-Items</th>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedDetailedItem0"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedDetailedItem1"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedDetailedItem2"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedDetailedItem3"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedDetailedItem4"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedDetailedItem5"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedDetailedItem6"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedDetailedItem7"></td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <p>Fix-Initial-Task-Items <br>(valid for every Pilot)</p>
+        <table id="fixTablePilotInitialTask">
+          <tr id="firstRowPilotInitialTask">
+            <th class="headTable">Fix-Initial-Task-Items</th>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedInitialTaskItem0"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedInitialTaskItem1"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedInitialTaskItem2"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedInitialTaskItem3"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedInitialTaskItem4"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedInitialTaskItem5"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedInitialTaskItem6"></td>
+          </tr>
+          <tr>
+            <td contenteditable="true" class="orange" id="fixedInitialTaskItem7"></td>
+          </tr>
+        </table>
+      </div>
+    </div> 
+  </div>
 
 
 
